@@ -9,7 +9,9 @@ export function markdownToHtml(markdown: string) {
 }
 
 export function markdownSection(markdown: string, heading: string) {
-	const pattern = new RegExp(`^##\\s+${escapeRegExp(heading)}\\s*\\n([\\s\\S]*?)(?=^##\\s+|\\s*$)`, "m");
+	const pattern = new RegExp(
+		`(?:^|\\r?\\n)##\\s+${escapeRegExp(heading)}\\s*\\r?\\n([\\s\\S]*?)(?=\\r?\\n##\\s+|$)`
+	);
 	return pattern.exec(markdown)?.[1]?.trim() ?? "";
 }
 

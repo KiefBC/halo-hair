@@ -63,11 +63,11 @@
 	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
 </svelte:head>
 
-<section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+<section class="bg-background px-4 py-14 sm:px-6 md:py-16 lg:px-8">
+	<div class="mx-auto grid max-w-7xl gap-8 lg:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
 		<div>
-			<h1 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About Jacky</h1>
-			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+			<h1 class="font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">About Jacky</h1>
+			<div class="about-copy mt-5 text-base leading-7 text-muted-foreground">
 				{@html aboutJackyHtml}
 			</div>
 		</div>
@@ -83,24 +83,24 @@
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
 				<span class="about-placeholder-label">{aboutPolaroids.jacky.marker}</span>
 			</div>
-			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.jacky.title}</p>
+			<div class="pt-4 text-center">
+				<p class="font-display text-2xl font-semibold leading-none text-rosewood">{aboutPolaroids.jacky.title}</p>
 				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.jacky.subtitle}</p>
 			</div>
 		</button>
 	</div>
 
-	<div class="mx-auto mt-12 grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-		<div class="rounded-3xl border border-sand/70 bg-cream p-6 md:p-8">
-			<div class="about-copy text-lg leading-8 text-muted-foreground">
+	<div class="mx-auto mt-10 grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+		<div class="rounded-3xl border border-sand/70 bg-cream p-6 md:p-7">
+			<div class="about-copy text-base leading-7 text-muted-foreground">
 				{@html aboutJackyExtraHtml}
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="bg-cream px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+<section class="bg-cream px-4 py-14 sm:px-6 md:py-16 lg:px-8">
+	<div class="mx-auto grid max-w-7xl gap-8 lg:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
 		<button
 			type="button"
 			aria-label={`Enlarge ${aboutPolaroids.salon.alt}`}
@@ -112,26 +112,26 @@
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
 				<span class="about-placeholder-label">{aboutPolaroids.salon.marker}</span>
 			</div>
-			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.salon.title}</p>
+			<div class="pt-4 text-center">
+				<p class="font-display text-2xl font-semibold leading-none text-rosewood">{aboutPolaroids.salon.title}</p>
 				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.salon.subtitle}</p>
 			</div>
 		</button>
 
 		<div>
-			<h2 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About the Salon</h2>
-			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+			<h2 class="font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">About the Salon</h2>
+			<div class="about-copy mt-5 text-base leading-7 text-muted-foreground">
 				{@html aboutSalonHtml}
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+<section class="bg-background px-4 py-14 sm:px-6 md:py-16 lg:px-8">
+	<div class="mx-auto grid max-w-7xl gap-8 lg:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
 		<div>
-			<h2 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About my Experience</h2>
-			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+			<h2 class="font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">About my Experience</h2>
+			<div class="about-copy mt-5 text-base leading-7 text-muted-foreground">
 				{@html aboutExperienceHtml}
 			</div>
 		</div>
@@ -147,19 +147,19 @@
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
 				<span class="about-placeholder-label">{aboutPolaroids.experience.marker}</span>
 			</div>
-			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.experience.title}</p>
+			<div class="pt-4 text-center">
+				<p class="font-display text-2xl font-semibold leading-none text-rosewood">{aboutPolaroids.experience.title}</p>
 				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.experience.subtitle}</p>
 			</div>
 		</button>
 	</div>
 </section>
 
-<section class="bg-background px-4 pb-16 sm:px-6 md:pb-24 lg:px-8">
-	<div class="about-contact-card mx-auto max-w-5xl rounded-[2rem] border border-sand/70 bg-cream p-6 text-center shadow-xl shadow-rosewood/10 md:p-10">
+<section class="bg-background px-4 pb-14 sm:px-6 md:pb-16 lg:px-8">
+	<div class="about-contact-card mx-auto max-w-4xl rounded-[2rem] border border-sand/70 bg-cream p-6 text-center shadow-xl shadow-rosewood/10 md:p-8">
 		<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Say hello</p>
-		<h2 class="mt-3 font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">Get in Touch</h2>
-		<div class="about-contact-copy mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+		<h2 class="mt-3 font-display text-4xl font-semibold leading-tight text-foreground">Get in Touch</h2>
+		<div class="about-contact-copy mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
 			{@html aboutContactHtml}
 		</div>
 		<div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -211,7 +211,7 @@
 	.about-copy :global(p + p),
 	.about-copy :global(p + blockquote),
 	.about-copy :global(blockquote + p) {
-		margin-top: 1.25rem;
+		margin-top: 1rem;
 	}
 
 	.about-contact-copy :global(p) {
@@ -225,9 +225,9 @@
 
 	.about-copy :global(blockquote) {
 		border-left: 4px solid color-mix(in srgb, var(--salon-sage) 60%, transparent);
-		padding-left: 1.25rem;
+		padding-left: 1rem;
 		font-family: var(--font-display);
-		font-size: 1.875rem;
+		font-size: 1.5rem;
 		line-height: 1.1;
 		color: var(--salon-rosewood);
 	}
@@ -315,12 +315,12 @@
 
 	@media (min-width: 768px) {
 		.about-polaroid {
-			width: min(100%, 31rem);
+			width: min(100%, 19rem);
 		}
 
 		.about-polaroid::before {
-			height: 1.45rem;
-			width: 5.75rem;
+			height: 1.15rem;
+			width: 4.75rem;
 		}
 	}
 

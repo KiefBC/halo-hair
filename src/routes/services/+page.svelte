@@ -14,9 +14,8 @@
 
 <section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
 	<div class="mx-auto max-w-7xl">
-		<div class="max-w-3xl">
-			<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Services</p>
-			<h1 class="mt-3 font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Services</h1>
+		<div class="mx-auto max-w-3xl text-center">
+			<h1 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Services</h1>
 			<div class="markdown-copy mt-5 text-lg leading-8 text-muted-foreground">
 				{@html pageIntroHtml}
 			</div>

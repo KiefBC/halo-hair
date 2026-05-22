@@ -123,8 +123,7 @@
 			</div>
 
 			<div>
-				<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">From the salon</p>
-				<div class="salon-updates mt-3 text-muted-foreground">
+				<div class="salon-updates text-muted-foreground">
 					{@html awardUpdatesHtml}
 				</div>
 			</div>

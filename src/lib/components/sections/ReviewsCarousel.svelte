@@ -2,20 +2,17 @@
 	import ReviewCard from "$lib/components/cards/ReviewCard.svelte";
 	import SectionHeading from "$lib/components/ui/SectionHeading.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import homeMarkdown from "$lib/content/home.md?raw";
-	import { markdownSectionText } from "$lib/content/markdown";
 	import { reviews } from "$lib/data/reviews";
 	import { site } from "$lib/data/site";
 
 	const marqueeReviews = [...reviews, ...reviews];
 	const mobileCarouselReviews = [...reviews, ...reviews.slice(0, 1)];
-	const reviewsDescription = markdownSectionText(homeMarkdown, "Reviews");
 </script>
 
 <section class="overflow-hidden bg-background py-14 md:py-20">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-			<SectionHeading align="left" eyebrow="Reviews" title="Kind words from clients" description={reviewsDescription} />
+			<SectionHeading align="left" title="Kind words from clients" />
 			<Button href={site.socials.vagaro} target="_blank" rel="noreferrer" variant="outline" size="lg" class="w-fit rounded-full border-sage/50 bg-cream text-moss hover:bg-sage/10">
 				Read more on Vagaro
 			</Button>
