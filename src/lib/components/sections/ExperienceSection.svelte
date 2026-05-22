@@ -49,7 +49,27 @@
 			marker: "Detail"
 		}
 	];
+
+	type SalonPolaroid = (typeof salonPolaroids)[number];
+
+	let activePolaroid = $state<SalonPolaroid | null>(null);
+
+	function openPolaroid(polaroid: SalonPolaroid) {
+		activePolaroid = polaroid;
+	}
+
+	function closePolaroid() {
+		activePolaroid = null;
+	}
+
+	function handlePolaroidKeydown(event: KeyboardEvent) {
+		if (event.key === "Escape") {
+			closePolaroid();
+		}
+	}
 </script>
+
+<svelte:window onkeydown={handlePolaroidKeydown} />
 
 <section class="relative overflow-hidden bg-cream py-16 md:py-24">
 	<div class="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(111,127,95,0.18),transparent_42%)]"></div>
@@ -60,7 +80,8 @@
 					<button
 						type="button"
 						aria-label={`Enlarge ${polaroid.alt}`}
-						class="salon-polaroid cursor-zoom-in border-0 bg-surface p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+						onclick={() => openPolaroid(polaroid)}
+						class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
 						style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
 					>
 						<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
@@ -94,6 +115,42 @@
 		</div>
 	</div>
 </section>
+
+{#if activePolaroid}
+	<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+		<button
+			type="button"
+			aria-label="Close enlarged polaroid"
+			class="absolute inset-0 cursor-zoom-out bg-foreground/70 backdrop-blur-sm"
+			onclick={closePolaroid}
+		></button>
+		<div
+			role="dialog"
+			aria-modal="true"
+			aria-label={activePolaroid.alt}
+			tabindex="-1"
+			class="expanded-polaroid relative z-10 bg-white p-4 pb-7 text-left shadow-2xl shadow-foreground/35 outline-none"
+			style={`--placeholder-visual: ${activePolaroid.visual};`}
+		>
+			<button
+				type="button"
+				aria-label="Close enlarged polaroid"
+				class="absolute right-3 top-3 z-20 rounded-full border border-cream/40 bg-foreground/35 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cream backdrop-blur transition hover:bg-foreground/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-surface"
+				onclick={closePolaroid}
+			>
+				Close
+			</button>
+			<div class="placeholder-photo expanded-polaroid-photo relative overflow-hidden bg-cream" role="img" aria-label={activePolaroid.alt}>
+				<div class="placeholder-photo-grid" aria-hidden="true"></div>
+				<span class="placeholder-photo-label">{activePolaroid.marker}</span>
+			</div>
+			<div class="pt-5 text-center">
+				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{activePolaroid.title}</p>
+				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{activePolaroid.subtitle}</p>
+			</div>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.polaroid-pile {
@@ -172,6 +229,31 @@
 	.salon-polaroid:focus-visible {
 		z-index: 20;
 		transform: translateY(-1rem) scale(1.1) rotate(0deg);
+	}
+
+	.expanded-polaroid {
+		width: min(92vw, 38rem);
+		max-height: calc(100vh - 2rem);
+		overflow: auto;
+		animation: polaroid-lightbox-in 180ms ease-out;
+	}
+
+	.expanded-polaroid-photo {
+		aspect-ratio: 4 / 5;
+		width: min(100%, 57.6vh, 33.6rem);
+		margin-inline: auto;
+		max-height: min(72vh, 42rem);
+	}
+
+	@keyframes polaroid-lightbox-in {
+		from {
+			opacity: 0;
+			transform: translateY(1rem) scale(0.94) rotate(var(--r, -2deg));
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1) rotate(0deg);
+		}
 	}
 
 	.salon-updates :global(h2) {
