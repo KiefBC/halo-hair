@@ -17,8 +17,15 @@
 		"keratin-smoothing-treatment": "right: 1.6rem; rotate: 5deg;"
 	};
 
+	const labelBySlug: Record<string, string> = {
+		colouring: "Colour",
+		"grey-transformations": "Grey",
+		"keratin-smoothing-treatment": "Smooth"
+	};
+
 	const rotation = $derived(rotationBySlug[service.slug] ?? "-1deg");
 	const tapeStyle = $derived(tapeBySlug[service.slug] ?? "left: 1.6rem; rotate: -4deg;");
+	const photoLabel = $derived(labelBySlug[service.slug] ?? service.title);
 </script>
 
 <Card.Root
@@ -32,10 +39,8 @@
 			aria-label={service.imageAlt}
 			class="polaroid-photo relative h-64 overflow-hidden bg-sand/40"
 		>
-			<div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.48),transparent_28%),linear-gradient(to_top,rgba(43,37,32,0.18),transparent_58%)]"></div>
-			<div class="absolute bottom-4 left-4 rounded-full bg-cream/80 px-3 py-1 text-xs font-medium text-rosewood backdrop-blur">
-				Captured moment
-			</div>
+			<div class="polaroid-photo-grid" aria-hidden="true"></div>
+			<span class="polaroid-photo-label">{photoLabel}</span>
 		</div>
 		<Card.Header class="px-2 pt-6 text-center">
 			<Card.Title class="font-display text-3xl font-semibold text-foreground">{service.title}</Card.Title>
@@ -73,8 +78,8 @@
 		inset: 0;
 		z-index: -1;
 		background:
-			linear-gradient(110deg, rgba(255, 255, 255, 0.5), transparent 36%),
-			linear-gradient(#fffdf9, #fbf8f3);
+			linear-gradient(110deg, rgba(241, 236, 223, 0.45), transparent 36%),
+			linear-gradient(var(--salon-surface), var(--salon-cream));
 	}
 
 	.polaroid-tape {
@@ -83,14 +88,48 @@
 		z-index: 5;
 		height: 1.6rem;
 		width: 5.75rem;
-		border: 1px solid rgba(216, 195, 170, 0.62);
-		background: rgba(251, 248, 243, 0.68);
-		box-shadow: 0 0.45rem 1rem rgba(111, 78, 69, 0.08);
+		border: 1px solid rgba(198, 197, 177, 0.72);
+		background: rgba(241, 236, 223, 0.72);
+		box-shadow: 0 0.45rem 1rem rgba(90, 66, 55, 0.08);
 		backdrop-filter: blur(4px);
 	}
 
 	.polaroid-photo {
+		display: grid;
+		place-items: center;
 		background: var(--service-visual);
+	}
+
+	.polaroid-photo::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(125deg, rgba(241, 236, 223, 0.42), transparent 36%);
+	}
+
+	.polaroid-photo-grid {
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(241, 236, 223, 0.18) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(241, 236, 223, 0.18) 1px, transparent 1px);
+		background-size: 2.1rem 2.1rem;
+		mix-blend-mode: soft-light;
+		opacity: 0.7;
+	}
+
+	.polaroid-photo-label {
+		position: relative;
+		z-index: 1;
+		border: 1px solid rgba(241, 236, 223, 0.46);
+		background: rgba(37, 41, 31, 0.24);
+		padding: 0.45rem 0.9rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--salon-cream);
+		backdrop-filter: blur(6px);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

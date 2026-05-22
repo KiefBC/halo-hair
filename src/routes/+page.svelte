@@ -2,7 +2,6 @@
 	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
 	import ExperienceSection from "$lib/components/sections/ExperienceSection.svelte";
 	import HeroSection from "$lib/components/sections/HeroSection.svelte";
-	import InstagramPreview from "$lib/components/sections/InstagramPreview.svelte";
 	import LocationSection from "$lib/components/sections/LocationSection.svelte";
 	import ReviewsCarousel from "$lib/components/sections/ReviewsCarousel.svelte";
 	import ServicesPreview from "$lib/components/sections/ServicesPreview.svelte";
@@ -18,8 +17,7 @@
 
 <HeroSection />
 <ServicesPreview />
-<ExperienceSection />
-<InstagramPreview />
 <ReviewsCarousel />
+<ExperienceSection />
 <LocationSection />
 <BookingCTA />
