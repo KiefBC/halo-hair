@@ -1,0 +1,18 @@
+{
+  "name": "Halo Hair Studio",
+  "short_name": "Halo",
+  "description": "Keep Halo close for easy appointment booking.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#cbd3c0",
+  "theme_color": "#2f4738",
+  "icons": [
+    {
+      "src": "/icons/halo-scissors.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

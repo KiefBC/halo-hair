@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Halo Hair Studio scissors icon">
+  <rect width="512" height="512" rx="112" fill="#cbd3c0"/>
+  <circle cx="256" cy="198" r="112" fill="none" stroke="#d2ad63" stroke-width="26" opacity="0.9"/>
+  <path d="M182 292 357 142" fill="none" stroke="#2f4738" stroke-width="30" stroke-linecap="round"/>
+  <path d="M182 220 357 370" fill="none" stroke="#2f4738" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="150" cy="318" r="44" fill="none" stroke="#7f634a" stroke-width="28"/>
+  <circle cx="150" cy="194" r="44" fill="none" stroke="#7f634a" stroke-width="28"/>
+  <circle cx="256" cy="256" r="14" fill="#46382e"/>
+</svg>
