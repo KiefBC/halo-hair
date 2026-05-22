@@ -3,6 +3,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import salonUpdatesMarkdown from "$lib/content/salon-updates.md?raw";
 	import { markdownToHtml } from "$lib/content/markdown";
+	import { onMount } from "svelte";
 
 	const newSalonSpaceMarker = "## Lorem Ipsum Salon Space";
 	const [awardMarkdown, newSalonSpaceMarkdown = ""] = salonUpdatesMarkdown.split(newSalonSpaceMarker);
@@ -47,18 +48,100 @@
 			marker: "Detail"
 		}
 	];
-	const salonCarouselPolaroids = [...salonPolaroids, ...salonPolaroids.slice(0, 1)];
-
 	type SalonPolaroid = (typeof salonPolaroids)[number];
 
+	const carouselDelay = 4200;
+	const carouselRestartDelay = 1800;
+
 	let activePolaroid = $state<SalonPolaroid | null>(null);
+	let carouselElement = $state<HTMLDivElement | null>(null);
+	let isCarouselDragging = $state(false);
+	let autoAdvanceTimer: ReturnType<typeof setTimeout> | undefined;
+	let restartTimer: ReturnType<typeof setTimeout> | undefined;
+	let didDragCarousel = false;
+	let dragStartX = 0;
+	let dragStartScrollLeft = 0;
+
+	function carouselSlides() {
+		return carouselElement ? Array.from(carouselElement.querySelectorAll<HTMLElement>(".salon-polaroid-slide")) : [];
+	}
+
+	function prefersReducedMotion() {
+		return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	}
+
+	function currentSlideIndex() {
+		if (!carouselElement) return 0;
+
+		const slides = carouselSlides();
+		const scrollLeft = carouselElement.scrollLeft;
+		let closestIndex = 0;
+		let closestDistance = Number.POSITIVE_INFINITY;
+
+		slides.forEach((slide, index) => {
+			const distance = Math.abs(scrollLeft - slide.offsetLeft);
+
+			if (distance < closestDistance) {
+				closestDistance = distance;
+				closestIndex = index;
+			}
+		});
+
+		return closestIndex;
+	}
+
+	function scrollToSlide(index: number, behavior: ScrollBehavior = "smooth") {
+		const slide = carouselSlides()[index];
+		slide?.scrollIntoView({ behavior, block: "nearest", inline: "start" });
+	}
+
+	function clearAutoAdvance() {
+		clearTimeout(autoAdvanceTimer);
+		clearTimeout(restartTimer);
+	}
+
+	function advanceCarousel() {
+		if (!carouselElement || activePolaroid || isCarouselDragging || prefersReducedMotion()) return;
+
+		const slides = carouselSlides();
+		if (slides.length < 2) return;
+
+		scrollToSlide((currentSlideIndex() + 1) % slides.length);
+		startAutoAdvance();
+	}
+
+	function startAutoAdvance(delay = carouselDelay) {
+		if (!carouselElement || prefersReducedMotion()) return;
+
+		clearAutoAdvance();
+		autoAdvanceTimer = setTimeout(advanceCarousel, delay);
+	}
+
+	function restartAutoAdvance() {
+		if (activePolaroid) return;
+
+		clearAutoAdvance();
+		restartTimer = setTimeout(() => startAutoAdvance(), carouselRestartDelay);
+	}
 
 	function openPolaroid(polaroid: SalonPolaroid) {
 		activePolaroid = polaroid;
+		clearAutoAdvance();
+	}
+
+	function handlePolaroidClick(event: MouseEvent, polaroid: SalonPolaroid) {
+		if (didDragCarousel) {
+			event.preventDefault();
+			event.stopPropagation();
+			return;
+		}
+
+		openPolaroid(polaroid);
 	}
 
 	function closePolaroid() {
 		activePolaroid = null;
+		restartAutoAdvance();
 	}
 
 	function handlePolaroidKeydown(event: KeyboardEvent) {
@@ -66,39 +149,98 @@
 			closePolaroid();
 		}
 	}
+
+	function handleCarouselPointerDown(event: PointerEvent) {
+		if (!carouselElement || event.button > 0 || event.pointerType !== "mouse") return;
+
+		clearAutoAdvance();
+		isCarouselDragging = true;
+		didDragCarousel = false;
+		dragStartX = event.clientX;
+		dragStartScrollLeft = carouselElement.scrollLeft;
+		carouselElement.setPointerCapture(event.pointerId);
+	}
+
+	function handleCarouselPointerMove(event: PointerEvent) {
+		if (!carouselElement || !isCarouselDragging) return;
+
+		const distance = event.clientX - dragStartX;
+
+		if (Math.abs(distance) > 4) {
+			didDragCarousel = true;
+			carouselElement.scrollLeft = dragStartScrollLeft - distance;
+			event.preventDefault();
+		}
+	}
+
+	function handleCarouselPointerEnd(event: PointerEvent) {
+		if (!isCarouselDragging) return;
+
+		isCarouselDragging = false;
+		carouselElement?.releasePointerCapture(event.pointerId);
+
+		if (didDragCarousel) {
+			scrollToSlide(currentSlideIndex());
+			setTimeout(() => {
+				didDragCarousel = false;
+			}, 120);
+		}
+
+		restartAutoAdvance();
+	}
+
+	function handleCarouselScroll() {
+		if (isCarouselDragging || activePolaroid || prefersReducedMotion()) return;
+
+		restartAutoAdvance();
+	}
+
+	onMount(() => {
+		startAutoAdvance();
+
+		return clearAutoAdvance;
+	});
 </script>
 
 <svelte:window onkeydown={handlePolaroidKeydown} />
 
-<section class="relative overflow-hidden bg-cream py-14 md:py-20">
+<section class="relative overflow-hidden bg-cream pb-8 pt-14 md:pb-10 md:pt-20">
 	<div class="absolute inset-y-0 left-0 hidden w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)] md:block"></div>
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-			<div class="salon-polaroid-carousel md:hidden" aria-label="Salon award and new salon space carousel">
-				<div class="salon-polaroid-track">
-					{#each salonCarouselPolaroids as polaroid, index (index)}
-						<div class="salon-polaroid-slide" aria-hidden={index >= salonPolaroids.length}>
-							<button
-								type="button"
-								aria-label={`Enlarge ${polaroid.alt}`}
-								onclick={() => openPolaroid(polaroid)}
-								class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-								style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
-								tabindex={index >= salonPolaroids.length ? -1 : undefined}
-								inert={index >= salonPolaroids.length ? true : undefined}
-							>
-								<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
-									<div class="placeholder-photo-grid" aria-hidden="true"></div>
-									<span class="placeholder-photo-label">{polaroid.marker}</span>
-								</div>
-								<div class="pt-4 text-center">
-									<p class="font-display text-2xl font-semibold leading-none text-rosewood">{polaroid.title}</p>
-									<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">{polaroid.subtitle}</p>
-								</div>
-							</button>
-						</div>
-					{/each}
-				</div>
+			<div
+				bind:this={carouselElement}
+				class:cursor-grabbing={isCarouselDragging}
+				class="salon-polaroid-carousel -mx-4 grid auto-cols-[78vw] grid-flow-col gap-5 overflow-x-auto scroll-px-4 snap-x snap-mandatory px-4 pb-7 pt-4 sm:-mx-6 sm:auto-cols-[20rem] sm:scroll-px-6 sm:px-6 md:hidden"
+				role="region"
+				aria-label="Salon award and new salon space carousel"
+				onscroll={handleCarouselScroll}
+				onpointerdown={handleCarouselPointerDown}
+				onpointermove={handleCarouselPointerMove}
+				onpointerup={handleCarouselPointerEnd}
+				onpointercancel={handleCarouselPointerEnd}
+				onpointerleave={handleCarouselPointerEnd}
+			>
+				{#each salonPolaroids as polaroid}
+					<div class="salon-polaroid-slide snap-start">
+						<button
+							type="button"
+							aria-label={`Enlarge ${polaroid.alt}`}
+							onclick={(event) => handlePolaroidClick(event, polaroid)}
+							class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+							style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
+						>
+							<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
+								<div class="placeholder-photo-grid" aria-hidden="true"></div>
+								<span class="placeholder-photo-label">{polaroid.marker}</span>
+							</div>
+							<div class="pt-4 text-center">
+								<p class="font-display text-2xl font-semibold leading-none text-rosewood">{polaroid.title}</p>
+								<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">{polaroid.subtitle}</p>
+							</div>
+						</button>
+					</div>
+				{/each}
 			</div>
 
 			<div class="polaroid-pile hidden md:block" aria-label="Salon award and new salon space placeholders">
@@ -257,23 +399,24 @@
 	}
 
 	.salon-polaroid-carousel {
-		overflow: hidden;
-		max-width: min(100%, 21rem);
-		margin-inline: auto;
-		padding-block: 1.25rem;
+		scrollbar-width: none;
+		cursor: grab;
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior-x: contain;
 	}
 
-	.salon-polaroid-track {
-		display: flex;
-		align-items: center;
-		animation: salon-polaroid-rotate-left 24s ease-in-out infinite;
+	.salon-polaroid-carousel.cursor-grabbing {
+		scroll-snap-type: none;
+		user-select: none;
+	}
+
+	.salon-polaroid-carousel::-webkit-scrollbar {
+		display: none;
 	}
 
 	.salon-polaroid-slide {
 		display: grid;
-		min-width: 100%;
 		place-items: center;
-		padding-inline: 0.75rem;
 	}
 
 	.salon-polaroid-carousel .salon-polaroid {
@@ -281,7 +424,7 @@
 		left: auto;
 		top: auto;
 		z-index: 1;
-		width: min(76vw, 16.25rem);
+		width: min(100%, 16.25rem);
 		transform: rotate(var(--r));
 	}
 
@@ -289,34 +432,6 @@
 	.salon-polaroid-carousel .salon-polaroid:focus-visible {
 		z-index: 2;
 		transform: translateY(-0.35rem) scale(1.03) rotate(var(--r));
-	}
-
-	.salon-polaroid-carousel:hover .salon-polaroid-track,
-	.salon-polaroid-carousel:focus-within .salon-polaroid-track {
-		animation-play-state: paused;
-	}
-
-	@keyframes salon-polaroid-rotate-left {
-		0%,
-		16% {
-			transform: translateX(0);
-		}
-		21%,
-		37% {
-			transform: translateX(-100%);
-		}
-		42%,
-		58% {
-			transform: translateX(-200%);
-		}
-		63%,
-		79% {
-			transform: translateX(-300%);
-		}
-		84%,
-		100% {
-			transform: translateX(-400%);
-		}
 	}
 
 	.expanded-polaroid {
@@ -347,9 +462,10 @@
 	.salon-updates :global(h2) {
 		margin-top: 1.75rem;
 		font-family: var(--font-display);
-		font-size: clamp(2.25rem, 4vw, 3.25rem);
+		font-size: clamp(1.9rem, 6.2vw, 3.25rem);
 		font-weight: 600;
 		line-height: 0.98;
+		white-space: nowrap;
 		color: var(--foreground);
 	}
 
@@ -385,23 +501,6 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.salon-polaroid-carousel {
-			overflow-x: auto;
-			scroll-snap-type: x mandatory;
-		}
-
-		.salon-polaroid-track {
-			animation: none;
-		}
-
-		.salon-polaroid-slide {
-			scroll-snap-align: center;
-		}
-
-		.salon-polaroid-slide[aria-hidden="true"] {
-			display: none;
-		}
-
 		.salon-polaroid {
 			transition: none;
 		}

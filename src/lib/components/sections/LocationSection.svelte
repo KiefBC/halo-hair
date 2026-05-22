@@ -7,7 +7,7 @@
 	import { site } from "$lib/data/site";
 </script>
 
-<section id="contact" class="scroll-mt-24 bg-cream pb-14 pt-8 md:scroll-mt-28 md:pb-20 md:pt-10">
+<section id="contact" class="scroll-mt-24 bg-cream pb-14 pt-3 md:scroll-mt-28 md:pb-20 md:pt-4">
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
 			<div>
@@ -15,7 +15,9 @@
 
 				<div class="mt-8 rounded-3xl border border-sand/70 bg-background p-6 text-center">
 					<p class="text-sm font-semibold uppercase tracking-[0.22em] text-clay">Find the salon</p>
-					<p class="mt-2 font-display text-3xl font-semibold text-foreground">{salonLocation.address}</p>
+					<p class="mt-2 overflow-hidden whitespace-nowrap font-display font-semibold leading-tight text-foreground text-[clamp(1.6rem,5.3vw,3rem)] md:text-[clamp(1.75rem,3.4vw,3rem)]">
+						{salonLocation.address}
+					</p>
 					<div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
 						<Button href={salonLocation.directionsUrl} target="_blank" rel="noreferrer" class="rounded-full bg-moss text-cream hover:bg-rosewood">
 							<MapPinnedIcon class="size-4" aria-hidden="true" />

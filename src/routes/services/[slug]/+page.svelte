@@ -51,11 +51,14 @@
 				<div class="mt-8 grid gap-6 md:grid-cols-2">
 					<div>
 						<h2 class="font-display text-3xl font-semibold text-foreground">Good for</h2>
-						<div class="mt-4 flex flex-wrap gap-2">
+						<ul class="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
 							{#each service.highlights as highlight}
-								<span class="rounded-full border border-sage/35 bg-background/60 px-3 py-1 text-sm font-semibold text-moss">{highlight}</span>
+								<li class="flex gap-3">
+									<span class="mt-2 size-1.5 shrink-0 rounded-full bg-clay" aria-hidden="true"></span>
+									<span>{highlight}</span>
+								</li>
 							{/each}
-						</div>
+						</ul>
 					</div>
 					<div>
 						<h2 class="font-display text-3xl font-semibold text-foreground">Includes</h2>
