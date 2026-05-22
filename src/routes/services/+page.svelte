@@ -12,7 +12,7 @@
 	<meta name="description" content="Explore colouring, grey transformations, and keratin smoothing treatments at Halo Hair Studio." />
 </svelte:head>
 
-<section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+<section class="bg-background px-4 pb-16 pt-10 sm:px-6 md:pb-24 md:pt-14 lg:px-8">
 	<div class="mx-auto max-w-7xl">
 		<div class="mx-auto max-w-3xl text-center">
 			<h1 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Services</h1>

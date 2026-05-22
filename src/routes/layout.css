@@ -160,6 +160,12 @@
 	html {
 		scroll-behavior: smooth;
 	}
+
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 260ms;
+		animation-timing-function: ease;
+	}
 }
 
 @keyframes review-marquee {

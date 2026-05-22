@@ -28,37 +28,36 @@
 	const photoLabel = $derived(labelBySlug[service.slug] ?? service.title);
 </script>
 
-<Card.Root
-	style={`--service-visual: ${service.visual}; --polaroid-rotate: ${rotation};`}
-	class="service-card group relative overflow-visible rounded-none bg-transparent p-0 shadow-none ring-0"
->
-	<div class="polaroid-card relative bg-white p-3 pb-6 shadow-xl shadow-rosewood/10 transition duration-300 hover:-translate-y-2 hover:rotate-0 hover:shadow-2xl hover:shadow-rosewood/15 focus-within:-translate-y-2 focus-within:rotate-0 focus-within:shadow-2xl focus-within:shadow-rosewood/15 md:pb-7">
-		<div class="polaroid-tape" style={tapeStyle} aria-hidden="true"></div>
-		<div
-			role="img"
-			aria-label={service.imageAlt}
-			class="polaroid-photo relative h-52 overflow-hidden bg-sand/40 md:h-56 lg:h-60"
-		>
-			<div class="polaroid-photo-grid" aria-hidden="true"></div>
-			<span class="polaroid-photo-label">{photoLabel}</span>
-		</div>
-		<Card.Header class="px-2 pt-5 text-center md:pt-6">
-			<Card.Title class="font-display text-2xl font-semibold text-foreground md:text-3xl">{service.title}</Card.Title>
-			<Card.Description class="mt-2 font-display text-xl leading-none text-clay md:text-2xl">
-				{service.description}
-			</Card.Description>
-		</Card.Header>
-		<Card.Content class="px-2 pt-2 text-center">
-			<a
-				href="/services"
-				class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-moss underline-offset-4 transition hover:text-rosewood hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+<a href={`/services/${service.slug}`} class="service-card group block outline-none" aria-label={`View details for ${service.title}`}>
+	<Card.Root
+		style={`--service-visual: ${service.visual}; --polaroid-rotate: ${rotation};`}
+		class="relative overflow-visible rounded-none bg-transparent p-0 shadow-none ring-0"
+	>
+		<div class="polaroid-card relative bg-white p-3 pb-6 shadow-xl shadow-rosewood/10 transition duration-300 group-hover:-translate-y-2 group-hover:rotate-0 group-hover:shadow-2xl group-hover:shadow-rosewood/15 group-focus-visible:-translate-y-2 group-focus-visible:rotate-0 group-focus-visible:shadow-2xl group-focus-visible:shadow-rosewood/15 group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-white md:pb-7">
+			<div class="polaroid-tape" style={tapeStyle} aria-hidden="true"></div>
+			<div
+				role="img"
+				aria-label={service.imageAlt}
+				class="polaroid-photo relative h-52 overflow-hidden bg-sand/40 md:h-56 lg:h-60"
 			>
-				More details
-				<ArrowRightIcon class="size-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
-			</a>
-		</Card.Content>
-	</div>
-</Card.Root>
+				<div class="polaroid-photo-grid" aria-hidden="true"></div>
+				<span class="polaroid-photo-label">{photoLabel}</span>
+			</div>
+			<Card.Header class="px-2 pt-5 text-center md:pt-6">
+				<Card.Title class="font-display text-2xl font-semibold text-foreground md:text-3xl">{service.title}</Card.Title>
+				<Card.Description class="mt-2 font-display text-xl leading-none text-clay md:text-2xl">
+					{service.description}
+				</Card.Description>
+			</Card.Header>
+			<Card.Content class="px-2 pt-2 text-center">
+				<span class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-moss underline-offset-4 transition group-hover:text-rosewood group-hover:underline">
+					More details
+					<ArrowRightIcon class="size-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+				</span>
+			</Card.Content>
+		</div>
+	</Card.Root>
+</a>
 
 <style>
 	:global(.service-card) {

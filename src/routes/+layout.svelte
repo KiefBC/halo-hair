@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onNavigate } from '$app/navigation';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import SiteFooter from '$lib/components/layout/SiteFooter.svelte';
@@ -6,6 +7,17 @@
 	import { site } from '$lib/data/site';
 
 	let { children } = $props();
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve(undefined);
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
