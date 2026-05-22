@@ -36,7 +36,7 @@
 
 <style>
 	.hero-aura-field {
-		opacity: 0.76;
+		opacity: 0.84;
 		filter: blur(0.2px);
 		mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 74%, transparent 100%);
 		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 74%, transparent 100%);
@@ -55,8 +55,8 @@
 		aspect-ratio: 1;
 		border-radius: 9999px;
 		background:
-			radial-gradient(circle, transparent 0 44%, rgba(210, 173, 99, 0.26) 46% 49%, transparent 57%),
-			radial-gradient(circle, rgba(216, 211, 194, 0.2), transparent 60%);
+			radial-gradient(circle, transparent 0 43%, rgba(210, 173, 99, 0.34) 46% 50%, transparent 58%),
+			radial-gradient(circle, rgba(216, 211, 194, 0.26), transparent 60%);
 		transform: translate(-50%, -50%);
 		animation: hero-aura-breathe 14s ease-in-out infinite;
 	}
@@ -97,24 +97,24 @@
 
 	@keyframes hero-aura-drift {
 		from {
-			opacity: 0.34;
-			transform: translate3d(-0.75rem, 0.5rem, 0) scale(0.96);
+			opacity: 0.4;
+			transform: translate3d(-1.35rem, 0.95rem, 0) scale(0.92);
 		}
 		to {
-			opacity: 0.68;
-			transform: translate3d(0.85rem, -0.75rem, 0) scale(1.08);
+			opacity: 0.76;
+			transform: translate3d(1.45rem, -1.15rem, 0) scale(1.14);
 		}
 	}
 
 	@keyframes hero-aura-breathe {
 		0%,
 		100% {
-			opacity: 0.48;
-			transform: translate(-50%, -50%) scale(0.98) rotate(-1deg);
+			opacity: 0.5;
+			transform: translate(-50%, -50%) scale(0.94) rotate(-2deg);
 		}
 		50% {
-			opacity: 0.72;
-			transform: translate(-50%, -50%) scale(1.04) rotate(1deg);
+			opacity: 0.9;
+			transform: translate(-50%, -50%) scale(1.09) rotate(2deg);
 		}
 	}
 
