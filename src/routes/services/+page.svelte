@@ -1,0 +1,40 @@
+<script lang="ts">
+	import ServiceCard from "$lib/components/cards/ServiceCard.svelte";
+	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
+	import { Badge } from "$lib/components/ui/badge";
+	import { services } from "$lib/data/services";
+</script>
+
+<svelte:head>
+	<title>Services | Halo Hair Studio</title>
+	<meta name="description" content="Explore colouring, grey transformations, and keratin smoothing treatments at Halo Hair Studio." />
+</svelte:head>
+
+<section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+	<div class="mx-auto max-w-7xl">
+		<div class="max-w-3xl">
+			<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Services</p>
+			<h1 class="mt-3 font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Thoughtfully planned hair services</h1>
+			<p class="mt-5 text-lg leading-8 text-muted-foreground">
+				This MVP keeps services simple and price-free. Exact service timing, pricing, and suitability can be confirmed through Vagaro or during consultation.
+			</p>
+		</div>
+
+		<div class="mt-12 grid gap-6 md:grid-cols-3">
+			{#each services as service}
+				<ServiceCard {service} />
+			{/each}
+		</div>
+
+		<div class="mt-12 rounded-[2rem] border border-sand/70 bg-cream p-6 md:p-8">
+			<h2 class="font-display text-3xl font-semibold text-foreground">Common appointment themes</h2>
+			<div class="mt-5 flex flex-wrap gap-2">
+				{#each services.flatMap((service) => service.highlights) as highlight}
+					<Badge variant="outline" class="border-sage/40 bg-surface text-moss">{highlight}</Badge>
+				{/each}
+			</div>
+		</div>
+	</div>
+</section>
+
+<BookingCTA />
