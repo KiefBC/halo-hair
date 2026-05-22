@@ -32,7 +32,7 @@
 	style={`--service-visual: ${service.visual}; --polaroid-rotate: ${rotation};`}
 	class="service-card group relative overflow-visible rounded-none bg-transparent p-0 shadow-none ring-0"
 >
-	<div class="polaroid-card relative bg-surface p-3 pb-7 shadow-xl shadow-rosewood/10 transition duration-300 hover:-translate-y-2 hover:rotate-0 hover:shadow-2xl hover:shadow-rosewood/15 focus-within:-translate-y-2 focus-within:rotate-0 focus-within:shadow-2xl focus-within:shadow-rosewood/15">
+	<div class="polaroid-card relative bg-white p-3 pb-7 shadow-xl shadow-rosewood/10 transition duration-300 hover:-translate-y-2 hover:rotate-0 hover:shadow-2xl hover:shadow-rosewood/15 focus-within:-translate-y-2 focus-within:rotate-0 focus-within:shadow-2xl focus-within:shadow-rosewood/15">
 		<div class="polaroid-tape" style={tapeStyle} aria-hidden="true"></div>
 		<div
 			role="img"
@@ -51,7 +51,7 @@
 		<Card.Content class="px-2 pt-2 text-center">
 			<a
 				href="/services"
-				class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-moss underline-offset-4 transition hover:text-rosewood hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-surface"
+				class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-moss underline-offset-4 transition hover:text-rosewood hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-white"
 			>
 				More details
 				<ArrowRightIcon class="size-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
@@ -77,9 +77,7 @@
 		position: absolute;
 		inset: 0;
 		z-index: -1;
-		background:
-			linear-gradient(110deg, rgba(216, 211, 194, 0.42), transparent 36%),
-			linear-gradient(var(--salon-surface), var(--salon-cream));
+		background: #fff;
 	}
 
 	.polaroid-tape {
