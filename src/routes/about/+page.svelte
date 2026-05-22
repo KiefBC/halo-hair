@@ -1,53 +1,96 @@
 <script lang="ts">
-	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
-	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import { site } from "$lib/data/site";
+	import aboutMarkdown from "$lib/content/about.md?raw";
+	import { markdownSectionHtml } from "$lib/content/markdown";
+
+	const aboutJackyHtml = markdownSectionHtml(aboutMarkdown, "About Jacky");
+	const aboutJackyExtraHtml = markdownSectionHtml(aboutMarkdown, "About Jacky Extra");
+	const aboutSalonHtml = markdownSectionHtml(aboutMarkdown, "About the Salon");
+	const aboutExperienceHtml = markdownSectionHtml(aboutMarkdown, "About my Experience");
+
+	const aboutPolaroids = {
+		jacky: {
+			title: "Lorem ipsum",
+			subtitle: "Dolor sit",
+			marker: "Lorem",
+			alt: "Placeholder portrait for Jacky",
+			visual:
+				"radial-gradient(circle at 24% 22%, rgba(241, 236, 223, 0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f)"
+		},
+		salon: {
+			title: "Dolor sit amet",
+			subtitle: "Consectetur",
+			marker: "Ipsum",
+			alt: "Placeholder for the Halo Hair Studio salon space",
+			visual:
+				"radial-gradient(circle at 72% 18%, rgba(241, 236, 223, 0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a)"
+		},
+		experience: {
+			title: "Consectetur",
+			subtitle: "Adipiscing",
+			marker: "Amet",
+			alt: "Placeholder for Jacky's hair experience",
+			visual:
+				"radial-gradient(circle at 50% 28%, rgba(241, 236, 223, 0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad)"
+		}
+	};
+
+	type AboutPolaroid = (typeof aboutPolaroids)[keyof typeof aboutPolaroids];
+
+	let activeAboutPolaroid = $state<AboutPolaroid | null>(null);
+
+	function openAboutPolaroid(polaroid: AboutPolaroid) {
+		activeAboutPolaroid = polaroid;
+	}
+
+	function closeAboutPolaroid() {
+		activeAboutPolaroid = null;
+	}
+
+	function handleAboutPolaroidKeydown(event: KeyboardEvent) {
+		if (event.key === "Escape") {
+			closeAboutPolaroid();
+		}
+	}
 </script>
+
+<svelte:window onkeydown={handleAboutPolaroidKeydown} />
 
 <svelte:head>
 	<title>About | Halo Hair Studio</title>
-	<meta name="description" content="Meet Jacky and learn about Halo Hair Studio in Langford, BC." />
+	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
 </svelte:head>
 
 <section class="bg-background px-4 py-16 sm:px-6 md:py-24 lg:px-8">
 	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
 		<div>
 			<h1 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About Jacky</h1>
-			<div class="about-copy mt-7 space-y-5 text-lg leading-8 text-muted-foreground">
-				<p>
-					Born and raised in the Black Forest of Germany, my passion for travel led me around the world, finally settling in Canada after meeting my wonderful husband, Kyle.
-				</p>
-				<p>
-					After falling in love with Kyle, and the breathtaking beauty of Vancouver Island, I decided to grow my roots permanently in the beautiful suburbs of Langford, BC.
-				</p>
-				<p>
-					My passion for both hair and meeting new people guides me to find purpose in giving people more confidence in their own skin by tailoring my client's hair to a unique style that works for them. I’m always grateful for being able to meet so many amazing people and connect on a personal level with each and every one. Being able to learn more about each and every person in such an intimate setting helps when it comes to the hair side of things and makes for the best service that is personalized to the wants and needs of my clientele.
-				</p>
+			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+				{@html aboutJackyHtml}
 			</div>
 		</div>
 
-		<div class="about-polaroid rotate-2 bg-white p-4 pb-7 shadow-2xl shadow-rosewood/15">
-			<div class="about-placeholder about-placeholder-jacky relative overflow-hidden" role="img" aria-label="Placeholder portrait for Jacky">
+		<button
+			type="button"
+			aria-label={`Enlarge ${aboutPolaroids.jacky.alt}`}
+			onclick={() => openAboutPolaroid(aboutPolaroids.jacky)}
+			class="about-polaroid block cursor-zoom-in rotate-2 border-0 bg-white p-4 pb-7 text-left shadow-2xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+			style={`--about-placeholder-visual: ${aboutPolaroids.jacky.visual};`}
+		>
+			<div class="about-placeholder relative overflow-hidden" role="img" aria-label={aboutPolaroids.jacky.alt}>
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
-				<span class="about-placeholder-label">Jacky</span>
+				<span class="about-placeholder-label">{aboutPolaroids.jacky.marker}</span>
 			</div>
 			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">Halo Hair Studio</p>
-				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">Langford, BC</p>
+				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.jacky.title}</p>
+				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.jacky.subtitle}</p>
 			</div>
-		</div>
+		</button>
 	</div>
 
 	<div class="mx-auto mt-12 grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
 		<div class="rounded-3xl border border-sand/70 bg-cream p-6 md:p-8">
-			<div class="about-copy space-y-5 text-lg leading-8 text-muted-foreground">
-				<p>
-					I’m a proud small business owner that loves to work hard and play hard! When I’m not busy transforming my client's hair, you’ll find me hiking in our beautiful mountains, globe-trotting, or breaking a sweat at CrossFit.
-				</p>
-				<p>
-					Now that you’ve got to know a little bit about me, I’d love to meet you and provide an outstanding hair experience that will leave you feeling more uniquely beautiful than an ocean pearl. So what are you waiting for, reach out to me for a consultation today!
-				</p>
+			<div class="about-copy text-lg leading-8 text-muted-foreground">
+				{@html aboutJackyExtraHtml}
 			</div>
 		</div>
 	</div>
@@ -55,30 +98,27 @@
 
 <section class="bg-cream px-4 py-16 sm:px-6 md:py-24 lg:px-8">
 	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-		<div class="about-polaroid -rotate-2 bg-white p-4 pb-7 shadow-2xl shadow-rosewood/15">
-			<div class="about-placeholder about-placeholder-salon relative overflow-hidden" role="img" aria-label="Placeholder for the Halo Hair Studio salon space">
+		<button
+			type="button"
+			aria-label={`Enlarge ${aboutPolaroids.salon.alt}`}
+			onclick={() => openAboutPolaroid(aboutPolaroids.salon)}
+			class="about-polaroid block cursor-zoom-in -rotate-2 border-0 bg-white p-4 pb-7 text-left shadow-2xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+			style={`--about-placeholder-visual: ${aboutPolaroids.salon.visual};`}
+		>
+			<div class="about-placeholder relative overflow-hidden" role="img" aria-label={aboutPolaroids.salon.alt}>
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
-				<span class="about-placeholder-label">Salon</span>
+				<span class="about-placeholder-label">{aboutPolaroids.salon.marker}</span>
 			</div>
 			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">956 Shaw Avenue</p>
-				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">New address</p>
+				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.salon.title}</p>
+				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.salon.subtitle}</p>
 			</div>
-		</div>
+		</button>
 
 		<div>
 			<h2 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About the Salon</h2>
-			<div class="about-copy mt-7 space-y-5 text-lg leading-8 text-muted-foreground">
-				<p>
-					Since Jacky is the sole stylist in the space, you’re able to fully relax and enjoy the experience without the hustle and bustle of a regular busy salon. Jacky is able to give you her full attention and the distractions of a busy salon are noticeably absent during your appointment. This allows for a relaxing ambience, free of stress.
-				</p>
-				<p class="font-semibold text-moss">NEW ADDRESS: 956 Shaw Avenue</p>
-				<p>
-					The new space is located in a separate space in Jacky and Kyle's new home in Langford, BC. Finding a home that could accommodate the salon was their first priority during the home-buying process. After a big move from Sooke, Jacky has completed the renovations on the new Langford location. The new salon is sleek and modern, tastefully accented with natural wood elements.
-				</p>
-				<blockquote class="border-l-4 border-sage/60 pl-5 font-display text-3xl leading-tight text-rosewood">
-					“The commercial salon environment was never my thing, and I always wanted to be my own boss so 3 years ago I decided to make my own dreams come true and open up my own home salon” - Jacky Pohl
-				</blockquote>
+			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+				{@html aboutSalonHtml}
 			</div>
 		</div>
 	</div>
@@ -88,59 +128,98 @@
 	<div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
 		<div>
 			<h2 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">About my Experience</h2>
-			<div class="about-copy mt-7 space-y-5 text-lg leading-8 text-muted-foreground">
-				<p>
-					Jacky is a professionally trained hair technician who is passionate about all thing’s hair. Her training started with a three-year apprenticeship in Europe, at the salon Udo Waltz when she was just 15 years old. Now, with over 16 years of experience, Jacky is considered a master stylist.
-				</p>
-				<p>
-					Her passion for hair, tied with her passion for travel, has given her many opportunities over the years. Including her favourite opportunity: Working as a stylist in five continents while travelling and living in places like Australia and New Zealand.
-				</p>
-				<p>
-					Because beauty trends come and go, there is always more to learn in the hair world. Jacky regularly attends classes in both Vancouver and the lower Vancouver Island area, learning new techniques from other professionals in the field. This constant continuation of learning allows her to never stop growing as a stylist and ensures she is able to achieve whatever look you’re after.
-				</p>
+			<div class="about-copy mt-7 text-lg leading-8 text-muted-foreground">
+				{@html aboutExperienceHtml}
 			</div>
 		</div>
 
-		<div class="about-polaroid rotate-1 bg-white p-4 pb-7 shadow-2xl shadow-rosewood/15">
-			<div class="about-placeholder about-placeholder-experience relative overflow-hidden" role="img" aria-label="Placeholder for Jacky's hair experience">
+		<button
+			type="button"
+			aria-label={`Enlarge ${aboutPolaroids.experience.alt}`}
+			onclick={() => openAboutPolaroid(aboutPolaroids.experience)}
+			class="about-polaroid block cursor-zoom-in rotate-1 border-0 bg-white p-4 pb-7 text-left shadow-2xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+			style={`--about-placeholder-visual: ${aboutPolaroids.experience.visual};`}
+		>
+			<div class="about-placeholder relative overflow-hidden" role="img" aria-label={aboutPolaroids.experience.alt}>
 				<div class="about-placeholder-grid" aria-hidden="true"></div>
-				<span class="about-placeholder-label">Experience</span>
+				<span class="about-placeholder-label">{aboutPolaroids.experience.marker}</span>
 			</div>
 			<div class="pt-5 text-center">
-				<p class="font-display text-4xl font-semibold leading-none text-rosewood">16+ years</p>
-				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">Five continents</p>
+				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{aboutPolaroids.experience.title}</p>
+				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{aboutPolaroids.experience.subtitle}</p>
+			</div>
+		</button>
+	</div>
+</section>
+
+{#if activeAboutPolaroid}
+	<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+		<button
+			type="button"
+			aria-label="Close enlarged polaroid"
+			class="absolute inset-0 cursor-zoom-out bg-foreground/70 backdrop-blur-sm"
+			onclick={closeAboutPolaroid}
+		></button>
+		<div
+			role="dialog"
+			aria-modal="true"
+			aria-label={activeAboutPolaroid.alt}
+			tabindex="-1"
+			class="expanded-about-polaroid relative z-10 bg-white p-4 pb-7 text-left shadow-2xl shadow-foreground/35 outline-none"
+			style={`--about-placeholder-visual: ${activeAboutPolaroid.visual};`}
+		>
+			<button
+				type="button"
+				aria-label="Close enlarged polaroid"
+				class="absolute right-3 top-3 z-20 rounded-full border border-cream/40 bg-foreground/35 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cream backdrop-blur transition hover:bg-foreground/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+				onclick={closeAboutPolaroid}
+			>
+				Close
+			</button>
+			<div class="about-placeholder expanded-about-polaroid-photo relative overflow-hidden" role="img" aria-label={activeAboutPolaroid.alt}>
+				<div class="about-placeholder-grid" aria-hidden="true"></div>
+				<span class="about-placeholder-label">{activeAboutPolaroid.marker}</span>
+			</div>
+			<div class="pt-5 text-center">
+				<p class="font-display text-4xl font-semibold leading-none text-rosewood">{activeAboutPolaroid.title}</p>
+				<p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-clay">{activeAboutPolaroid.subtitle}</p>
 			</div>
 		</div>
 	</div>
-</section>
-
-<section class="bg-cream px-4 py-16 sm:px-6 md:py-20 lg:px-8">
-	<div class="mx-auto max-w-5xl rounded-3xl border border-sand/70 bg-background p-6 text-center md:p-8">
-		<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Get in Touch</p>
-		<h2 class="mt-3 font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">EMAIL | HAIRBYJACKYPOHL@GMAIL.COM</h2>
-		<p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-			Reach out for a consultation, or use Vagaro when you’re ready to book.
-		</p>
-		<div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-			<Button href={`mailto:${site.email}`} variant="outline" size="lg" class="rounded-full border-sage/50 bg-surface text-moss hover:bg-sage/10">
-				Email Jacky
-			</Button>
-			<Button href={site.bookingUrl} target="_blank" rel="noreferrer" size="lg" class="rounded-full bg-moss text-cream hover:bg-rosewood">
-				Book through Vagaro
-				<ArrowRightIcon class="size-4" aria-hidden="true" />
-			</Button>
-		</div>
-	</div>
-</section>
-
-<BookingCTA />
+{/if}
 
 <style>
+	.about-copy :global(p + p),
+	.about-copy :global(p + blockquote),
+	.about-copy :global(blockquote + p) {
+		margin-top: 1.25rem;
+	}
+
+	.about-copy :global(strong) {
+		font-weight: 700;
+		color: var(--salon-moss);
+	}
+
+	.about-copy :global(blockquote) {
+		border-left: 4px solid color-mix(in srgb, var(--salon-sage) 60%, transparent);
+		padding-left: 1.25rem;
+		font-family: var(--font-display);
+		font-size: 1.875rem;
+		line-height: 1.1;
+		color: var(--salon-rosewood);
+	}
+
 	.about-polaroid {
 		position: relative;
 		isolation: isolate;
-		max-width: 28rem;
+		width: min(100%, 31rem);
 		margin-inline: auto;
+		transform-origin: center;
+	}
+
+	.about-polaroid:hover,
+	.about-polaroid:focus-visible {
+		transform: translateY(-1rem) scale(1.06) rotate(0deg);
 	}
 
 	.about-polaroid::before {
@@ -198,15 +277,38 @@
 		backdrop-filter: blur(6px);
 	}
 
-	.about-placeholder-jacky {
-		--about-placeholder-visual: radial-gradient(circle at 24% 22%, rgba(241, 236, 223, 0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f);
+	.expanded-about-polaroid {
+		width: min(92vw, 38rem);
+		max-height: calc(100vh - 2rem);
+		overflow: auto;
+		animation: about-polaroid-lightbox-in 180ms ease-out;
 	}
 
-	.about-placeholder-salon {
-		--about-placeholder-visual: radial-gradient(circle at 72% 18%, rgba(241, 236, 223, 0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a);
+	.expanded-about-polaroid-photo {
+		width: min(100%, 57.6vh, 33.6rem);
+		margin-inline: auto;
+		max-height: min(72vh, 42rem);
 	}
 
-	.about-placeholder-experience {
-		--about-placeholder-visual: radial-gradient(circle at 50% 28%, rgba(241, 236, 223, 0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad);
+	@keyframes about-polaroid-lightbox-in {
+		from {
+			opacity: 0;
+			transform: translateY(1rem) scale(0.94) rotate(-2deg);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1) rotate(0deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.about-polaroid {
+			transition: none;
+		}
+
+		.about-polaroid:hover,
+		.about-polaroid:focus-visible {
+			transform: none;
+		}
 	}
 </style>

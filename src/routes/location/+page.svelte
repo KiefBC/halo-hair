@@ -1,6 +1,5 @@
 <script lang="ts">
 	import LocationMap from "$lib/components/map/LocationMap.svelte";
-	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { location as salonLocation } from "$lib/data/location";
 </script>
@@ -40,5 +39,3 @@
 		<LocationMap />
 	</div>
 </section>
-
-<BookingCTA />

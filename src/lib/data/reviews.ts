@@ -5,28 +5,24 @@ export const reviews: Review[] = [
 		name: "Client Name",
 		source: "Vagaro",
 		rating: 5,
-		text:
-			"Placeholder review from Vagaro. Jacky made me feel comfortable, listened to what I wanted, and my colour turned out beautifully."
+		text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae lorem sit amet ipsum tincidunt pretium."
 	},
 	{
 		name: "Client Name",
 		source: "Vagaro",
 		rating: 5,
-		text:
-			"Placeholder review from Vagaro. A calm, professional salon experience. I always leave feeling refreshed and confident."
+		text: "Praesent suscipit, magna at faucibus mollis, sapien velit aliquam lorem, sed posuere ipsum neque vitae justo."
 	},
 	{
 		name: "Client Name",
 		source: "Vagaro",
 		rating: 5,
-		text:
-			"Placeholder review from Vagaro. She explains the process clearly and gives honest advice about what will work for your hair."
+		text: "Curabitur blandit lorem at eros dictum, vitae facilisis sem laoreet. Donec vel urna id nibh feugiat porta."
 	},
 	{
 		name: "Client Name",
 		source: "Vagaro",
 		rating: 5,
-		text:
-			"Placeholder review from Vagaro. The salon is relaxing, and the result was exactly what I hoped for."
+		text: "Suspendisse potenti. Integer facilisis, massa vel commodo volutpat, lorem mauris placerat justo."
 	}
 ];

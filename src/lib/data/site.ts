@@ -1,8 +1,8 @@
 export const site = {
 	name: "Halo Hair Studio",
-	tagline: "Colouring, grey transformations, and keratin smoothing in Langford, BC",
+	tagline: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 	description:
-		"Halo Hair Studio offers colouring, grey transformations, and keratin smoothing treatments in Langford, BC.",
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	location: "Langford, British Columbia",
 	email: "hairbyjackypohl@gmail.com",
 	phone: "(250) 000-0000",

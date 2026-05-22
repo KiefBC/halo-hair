@@ -4,7 +4,7 @@ export const services: Service[] = [
 	{
 		title: "Colouring",
 		slug: "colouring",
-		description: "Rich Colours",
+		description: "Lorem ipsum",
 		highlights: ["Balayage", "Foilyage", "Highlights"],
 		image: "/images/placeholders/colouring.jpg",
 		imageAlt: "Placeholder for rich hair colour service",
@@ -14,7 +14,7 @@ export const services: Service[] = [
 	{
 		title: "Grey Transformations",
 		slug: "grey-transformations",
-		description: "Jacky's speciality",
+		description: "Dolor sit",
 		highlights: ["Grey transitions", "Colour planning", "Natural grow-out"],
 		image: "/images/placeholders/grey-transformations.jpg",
 		imageAlt: "Placeholder for grey transformation salon result",
@@ -24,7 +24,7 @@ export const services: Service[] = [
 	{
 		title: "Keratin Smoothing Treatment",
 		slug: "keratin-smoothing-treatment",
-		description: "A new service!",
+		description: "Amet lorem",
 		highlights: ["Cezanne Classic", "Smoothing", "Frizz control"],
 		image: "/images/placeholders/keratin-smoothing-treatment.jpg",
 		imageAlt: "Placeholder for keratin smoothing treatment result",

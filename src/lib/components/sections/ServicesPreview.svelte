@@ -2,7 +2,11 @@
 	import ServiceCard from "$lib/components/cards/ServiceCard.svelte";
 	import SectionHeading from "$lib/components/ui/SectionHeading.svelte";
 	import { Button } from "$lib/components/ui/button";
+	import homeMarkdown from "$lib/content/home.md?raw";
+	import { markdownSectionHtml } from "$lib/content/markdown";
 	import { services } from "$lib/data/services";
+
+	const servicesPreviewHtml = markdownSectionHtml(homeMarkdown, "Services Preview");
 </script>
 
 <section class="bg-cream py-16 md:py-24">
@@ -16,12 +20,18 @@
 			{/each}
 		</div>
 		<div class="mx-auto mt-10 max-w-xl text-center">
-			<p class="mb-5 text-sm leading-6 text-muted-foreground">
-				More information about each appointment is available in the full Services section.
-			</p>
+			<div class="services-preview-copy mb-5 text-sm leading-6 text-muted-foreground">
+				{@html servicesPreviewHtml}
+			</div>
 			<Button href="/services" variant="outline" size="lg" class="rounded-full border-sage/50 bg-surface text-moss hover:bg-sage/10">
 				View Services
 			</Button>
 		</div>
 	</div>
 </section>
+
+<style>
+	.services-preview-copy :global(p) {
+		margin: 0;
+	}
+</style>

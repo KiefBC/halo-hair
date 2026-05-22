@@ -1,5 +1,4 @@
 <script lang="ts">
-	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
 	import ExperienceSection from "$lib/components/sections/ExperienceSection.svelte";
 	import HeroSection from "$lib/components/sections/HeroSection.svelte";
 	import LocationSection from "$lib/components/sections/LocationSection.svelte";
@@ -20,4 +19,3 @@
 <ReviewsCarousel />
 <ExperienceSection />
 <LocationSection />
-<BookingCTA />

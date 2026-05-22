@@ -1,48 +1,46 @@
 <script lang="ts">
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
-	import { marked } from "marked";
 	import { Button } from "$lib/components/ui/button";
 	import salonUpdatesMarkdown from "$lib/content/salon-updates.md?raw";
+	import { markdownToHtml } from "$lib/content/markdown";
 
-	const newSalonSpaceMarker = "## NEW SALON SPACE";
+	const newSalonSpaceMarker = "## Lorem Ipsum Salon Space";
 	const [awardMarkdown, newSalonSpaceMarkdown = ""] = salonUpdatesMarkdown.split(newSalonSpaceMarker);
-	const awardUpdatesHtml = marked.parse(awardMarkdown.trim(), { async: false }) as string;
-	const newSalonSpaceHtml = marked.parse(`${newSalonSpaceMarker}${newSalonSpaceMarkdown}`.trim(), {
-		async: false
-	}) as string;
+	const awardUpdatesHtml = markdownToHtml(awardMarkdown);
+	const newSalonSpaceHtml = markdownToHtml(`${newSalonSpaceMarker}${newSalonSpaceMarkdown}`);
 
 	const salonPolaroids = [
 		{
-			title: "Best Hair Salon",
-			subtitle: "2024 + 2025",
-			alt: "Placeholder for Best of the WestShore award graphic",
+			title: "Lorem Ipsum",
+			subtitle: "dolor sit",
+			alt: "Lorem ipsum placeholder graphic",
 			visual:
 				"radial-gradient(circle at 50% 28%, rgba(241,236,223,0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad)",
 			style: "--x: 4%; --y: 3%; --r: -7deg; --z: 2;",
 			marker: "Award"
 		},
 		{
-			title: "NEW SALON SPACE",
-			subtitle: "newly renovated",
-			alt: "Placeholder for newly renovated Halo Hair Studio salon space",
+			title: "Dolor Sit Amet",
+			subtitle: "consectetur",
+			alt: "Dolor sit amet placeholder graphic",
 			visual:
 				"radial-gradient(circle at 72% 18%, rgba(241,236,223,0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a)",
 			style: "--x: 43%; --y: 0%; --r: 5deg; --z: 3;",
 			marker: "Salon"
 		},
 		{
-			title: "Halo Hair Studio",
-			subtitle: "sleek and modern",
-			alt: "Placeholder for sleek and modern salon interior",
+			title: "Consectetur",
+			subtitle: "adipiscing elit",
+			alt: "Consectetur placeholder graphic",
 			visual:
 				"radial-gradient(circle at 24% 22%, rgba(241,236,223,0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f)",
 			style: "--x: 13%; --y: 39%; --r: 4deg; --z: 4;",
 			marker: "Space"
 		},
 		{
-			title: "Natural wood details",
-			subtitle: "warm salon moments",
-			alt: "Placeholder for salon space with natural wood details",
+			title: "Adipiscing Elit",
+			subtitle: "lorem ipsum",
+			alt: "Adipiscing elit placeholder graphic",
 			visual:
 				"radial-gradient(circle at 76% 24%, rgba(235,229,214,0.74), transparent 30%), linear-gradient(135deg, #43533a, #c8c5ad 48%, #5a4237)",
 			style: "--x: 55%; --y: 44%; --r: -4deg; --z: 5;",

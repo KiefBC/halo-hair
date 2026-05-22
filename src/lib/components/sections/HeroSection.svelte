@@ -2,6 +2,10 @@
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import BookingButton from "$lib/components/booking/BookingButton.svelte";
 	import { Button } from "$lib/components/ui/button";
+	import homeMarkdown from "$lib/content/home.md?raw";
+	import { markdownSectionHtml } from "$lib/content/markdown";
+
+	const heroHtml = markdownSectionHtml(homeMarkdown, "Hero");
 </script>
 
 <section class="relative isolate overflow-hidden bg-background">
@@ -10,9 +14,9 @@
 		<h1 class="font-display text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
 			Halo Hair Studio
 		</h1>
-		<p class="mx-auto mt-6 max-w-xl font-display text-3xl font-medium leading-tight text-rosewood">
-			Come in, settle in, and leave feeling like yourself.
-		</p>
+		<div class="hero-copy mx-auto mt-6 max-w-xl font-display text-3xl font-medium leading-tight text-rosewood">
+			{@html heroHtml}
+		</div>
 		<div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 				<BookingButton label="Book through Vagaro" mobileLabel="Book through Vagaro" />
 				<Button href="/services" variant="outline" size="lg" class="rounded-full border-sage/50 bg-cream text-moss hover:bg-sage/10">
@@ -22,3 +26,9 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	.hero-copy :global(p) {
+		margin: 0;
+	}
+</style>
