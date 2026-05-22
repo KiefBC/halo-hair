@@ -48,9 +48,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 </svelte:head>
 
-<div class="min-h-screen bg-background text-foreground">
+<div class="flex min-h-screen flex-col bg-background text-foreground">
 	<SiteHeader />
-	<main>
+	<main class="flex-1">
 		{@render children()}
 	</main>
 	<SiteFooter />

@@ -39,17 +39,6 @@
 				</h1>
 				<p class="mt-5 text-lg leading-8 text-muted-foreground">{service.detail}</p>
 
-				<div class="mt-8 grid gap-4 sm:grid-cols-2">
-					<div class="rounded-2xl border border-sage/30 bg-background/70 p-5">
-						<p class="text-xs font-semibold uppercase tracking-[0.22em] text-clay">Price</p>
-						<p class="mt-2 font-display text-3xl font-semibold text-rosewood">{service.price}</p>
-					</div>
-					<div class="rounded-2xl border border-sage/30 bg-background/70 p-5">
-						<p class="text-xs font-semibold uppercase tracking-[0.22em] text-clay">Timing</p>
-						<p class="mt-2 font-display text-3xl font-semibold text-rosewood">{service.duration}</p>
-					</div>
-				</div>
-
 				<div class="mt-8 grid gap-6 md:grid-cols-2">
 					<div>
 						<h2 class="font-display text-3xl font-semibold text-foreground">Good for</h2>
