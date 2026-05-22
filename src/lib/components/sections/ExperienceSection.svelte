@@ -47,6 +47,7 @@
 			marker: "Detail"
 		}
 	];
+	const salonCarouselPolaroids = [...salonPolaroids, ...salonPolaroids.slice(0, 1)];
 
 	type SalonPolaroid = (typeof salonPolaroids)[number];
 
@@ -70,10 +71,37 @@
 <svelte:window onkeydown={handlePolaroidKeydown} />
 
 <section class="relative overflow-hidden bg-cream py-16 md:py-24">
-	<div class="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)]"></div>
+	<div class="absolute inset-y-0 left-0 hidden w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)] md:block"></div>
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-			<div class="polaroid-pile" aria-label="Salon award and new salon space placeholders">
+			<div class="salon-polaroid-carousel md:hidden" aria-label="Salon award and new salon space carousel">
+				<div class="salon-polaroid-track">
+					{#each salonCarouselPolaroids as polaroid, index (index)}
+						<div class="salon-polaroid-slide" aria-hidden={index >= salonPolaroids.length}>
+							<button
+								type="button"
+								aria-label={`Enlarge ${polaroid.alt}`}
+								onclick={() => openPolaroid(polaroid)}
+								class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+								style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
+								tabindex={index >= salonPolaroids.length ? -1 : undefined}
+								inert={index >= salonPolaroids.length ? true : undefined}
+							>
+								<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
+									<div class="placeholder-photo-grid" aria-hidden="true"></div>
+									<span class="placeholder-photo-label">{polaroid.marker}</span>
+								</div>
+								<div class="pt-4 text-center">
+									<p class="font-display text-2xl font-semibold leading-none text-rosewood">{polaroid.title}</p>
+									<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">{polaroid.subtitle}</p>
+								</div>
+							</button>
+						</div>
+					{/each}
+				</div>
+			</div>
+
+			<div class="polaroid-pile hidden md:block" aria-label="Salon award and new salon space placeholders">
 				{#each salonPolaroids as polaroid}
 					<button
 						type="button"
@@ -229,6 +257,69 @@
 		transform: translateY(-1rem) scale(1.1) rotate(0deg);
 	}
 
+	.salon-polaroid-carousel {
+		overflow: hidden;
+		max-width: min(100%, 21rem);
+		margin-inline: auto;
+		padding-block: 1.25rem;
+	}
+
+	.salon-polaroid-track {
+		display: flex;
+		align-items: center;
+		animation: salon-polaroid-rotate-left 24s ease-in-out infinite;
+	}
+
+	.salon-polaroid-slide {
+		display: grid;
+		min-width: 100%;
+		place-items: center;
+		padding-inline: 0.75rem;
+	}
+
+	.salon-polaroid-carousel .salon-polaroid {
+		position: relative;
+		left: auto;
+		top: auto;
+		z-index: 1;
+		width: min(76vw, 16.25rem);
+		transform: rotate(var(--r));
+	}
+
+	.salon-polaroid-carousel .salon-polaroid:hover,
+	.salon-polaroid-carousel .salon-polaroid:focus-visible {
+		z-index: 2;
+		transform: translateY(-0.35rem) scale(1.03) rotate(var(--r));
+	}
+
+	.salon-polaroid-carousel:hover .salon-polaroid-track,
+	.salon-polaroid-carousel:focus-within .salon-polaroid-track {
+		animation-play-state: paused;
+	}
+
+	@keyframes salon-polaroid-rotate-left {
+		0%,
+		16% {
+			transform: translateX(0);
+		}
+		21%,
+		37% {
+			transform: translateX(-100%);
+		}
+		42%,
+		58% {
+			transform: translateX(-200%);
+		}
+		63%,
+		79% {
+			transform: translateX(-300%);
+		}
+		84%,
+		100% {
+			transform: translateX(-400%);
+		}
+	}
+
 	.expanded-polaroid {
 		width: min(92vw, 38rem);
 		max-height: calc(100vh - 2rem);
@@ -295,12 +386,31 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		.salon-polaroid-carousel {
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+		}
+
+		.salon-polaroid-track {
+			animation: none;
+		}
+
+		.salon-polaroid-slide {
+			scroll-snap-align: center;
+		}
+
+		.salon-polaroid-slide[aria-hidden="true"] {
+			display: none;
+		}
+
 		.salon-polaroid {
 			transition: none;
 		}
 
 		.salon-polaroid:hover,
-		.salon-polaroid:focus-visible {
+		.salon-polaroid:focus-visible,
+		.salon-polaroid-carousel .salon-polaroid:hover,
+		.salon-polaroid-carousel .salon-polaroid:focus-visible {
 			transform: rotate(var(--r));
 		}
 	}
