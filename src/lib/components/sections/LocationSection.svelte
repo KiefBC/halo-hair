@@ -37,7 +37,7 @@
 				enctype="text/plain"
 				class="rounded-[2rem] border border-sand/70 bg-background p-6 shadow-sm md:p-8"
 			>
-				<div class="grid gap-5 sm:grid-cols-2">
+				<div class="grid gap-5">
 					<label class="grid gap-2 text-sm font-semibold text-foreground">
 						Name
 						<input
