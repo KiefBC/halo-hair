@@ -17,7 +17,7 @@
 		<span class="hero-aura-orb hero-aura-orb-three"></span>
 	</div>
 	<div class="hero-aura-fade pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-16" aria-hidden="true"></div>
-	<div class="relative z-10 mx-auto max-w-5xl px-4 pb-12 pt-16 text-center sm:px-6 md:pb-16 md:pt-20 lg:px-8 lg:pb-20 lg:pt-24">
+	<div class="relative z-10 mx-auto max-w-5xl px-4 pb-7 pt-16 text-center sm:px-6 md:pb-9 md:pt-20 lg:px-8 lg:pb-10 lg:pt-24">
 		<h1 class="font-display text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl lg:text-6xl">
 			Halo Hair Studio
 		</h1>
