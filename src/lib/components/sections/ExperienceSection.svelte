@@ -93,7 +93,12 @@
 
 	function scrollToSlide(index: number, behavior: ScrollBehavior = "smooth") {
 		const slide = carouselSlides()[index];
-		slide?.scrollIntoView({ behavior, block: "nearest", inline: "start" });
+		if (!carouselElement || !slide) return;
+
+		carouselElement.scrollTo({
+			left: slide.offsetLeft - carouselElement.offsetLeft,
+			behavior
+		});
 	}
 
 	function clearAutoAdvance() {
