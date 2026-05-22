@@ -9,7 +9,7 @@
 	const servicesPreviewHtml = markdownSectionHtml(homeMarkdown, "Services Preview");
 </script>
 
-<section class="bg-cream py-14 md:py-20">
+<section class="bg-cream pb-14 pt-10 md:pb-20 md:pt-12">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<SectionHeading
 			title="Services"

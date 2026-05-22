@@ -1,4 +1,6 @@
 <script lang="ts">
+	import BookingButton from "$lib/components/booking/BookingButton.svelte";
+	import { Button } from "$lib/components/ui/button";
 	import aboutMarkdown from "$lib/content/about.md?raw";
 	import { markdownSectionHtml } from "$lib/content/markdown";
 
@@ -6,6 +8,7 @@
 	const aboutJackyExtraHtml = markdownSectionHtml(aboutMarkdown, "About Jacky Extra");
 	const aboutSalonHtml = markdownSectionHtml(aboutMarkdown, "About the Salon");
 	const aboutExperienceHtml = markdownSectionHtml(aboutMarkdown, "About my Experience");
+	const aboutContactHtml = markdownSectionHtml(aboutMarkdown, "Get in Touch");
 
 	const aboutPolaroids = {
 		jacky: {
@@ -152,6 +155,22 @@
 	</div>
 </section>
 
+<section class="bg-background px-4 pb-16 sm:px-6 md:pb-24 lg:px-8">
+	<div class="about-contact-card mx-auto max-w-5xl rounded-[2rem] border border-sand/70 bg-cream p-6 text-center shadow-xl shadow-rosewood/10 md:p-10">
+		<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Say hello</p>
+		<h2 class="mt-3 font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">Get in Touch</h2>
+		<div class="about-contact-copy mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+			{@html aboutContactHtml}
+		</div>
+		<div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+			<BookingButton label="Book through Vagaro" mobileLabel="Book through Vagaro" />
+			<Button href="/#contact" variant="outline" size="lg" class="rounded-full border-sage/50 bg-surface text-moss hover:bg-sage/10">
+				Get in touch
+			</Button>
+		</div>
+	</div>
+</section>
+
 {#if activeAboutPolaroid}
 	<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
 		<button
@@ -195,6 +214,10 @@
 		margin-top: 1.25rem;
 	}
 
+	.about-contact-copy :global(p) {
+		margin: 0;
+	}
+
 	.about-copy :global(strong) {
 		font-weight: 700;
 		color: var(--salon-moss);
@@ -212,7 +235,7 @@
 	.about-polaroid {
 		position: relative;
 		isolation: isolate;
-		width: min(100%, 31rem);
+		width: min(82vw, 20rem);
 		margin-inline: auto;
 		transform-origin: center;
 	}
@@ -228,8 +251,8 @@
 		top: -0.8rem;
 		left: 50%;
 		z-index: 2;
-		height: 1.45rem;
-		width: 5.75rem;
+		height: 1.2rem;
+		width: 4.75rem;
 		translate: -50% 0;
 		rotate: -2deg;
 		border: 1px solid rgba(170, 180, 157, 0.78);
@@ -288,6 +311,17 @@
 		width: min(100%, 57.6vh, 33.6rem);
 		margin-inline: auto;
 		max-height: min(72vh, 42rem);
+	}
+
+	@media (min-width: 768px) {
+		.about-polaroid {
+			width: min(100%, 31rem);
+		}
+
+		.about-polaroid::before {
+			height: 1.45rem;
+			width: 5.75rem;
+		}
 	}
 
 	@keyframes about-polaroid-lightbox-in {
