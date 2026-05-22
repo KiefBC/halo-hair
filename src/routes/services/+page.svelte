@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ServiceCard from "$lib/components/cards/ServiceCard.svelte";
 	import BookingCTA from "$lib/components/sections/BookingCTA.svelte";
-	import { Badge } from "$lib/components/ui/badge";
 	import { services } from "$lib/data/services";
 </script>
 
@@ -26,14 +25,6 @@
 			{/each}
 		</div>
 
-		<div class="mt-12 rounded-[2rem] border border-sand/70 bg-cream p-6 md:p-8">
-			<h2 class="font-display text-3xl font-semibold text-foreground">Common appointment themes</h2>
-			<div class="mt-5 flex flex-wrap gap-2">
-				{#each services.flatMap((service) => service.highlights) as highlight}
-					<Badge variant="outline" class="border-sage/40 bg-surface text-moss">{highlight}</Badge>
-				{/each}
-			</div>
-		</div>
 	</div>
 </section>
 

@@ -15,9 +15,12 @@
 				<ServiceCard {service} />
 			{/each}
 		</div>
-		<div class="mt-10 text-center">
+		<div class="mx-auto mt-10 max-w-xl text-center">
+			<p class="mb-5 text-sm leading-6 text-muted-foreground">
+				More information about each appointment is available in the full Services section.
+			</p>
 			<Button href="/services" variant="outline" size="lg" class="rounded-full border-sage/50 bg-surface text-moss hover:bg-sage/10">
-				View all services
+				View Services
 			</Button>
 		</div>
 	</div>
