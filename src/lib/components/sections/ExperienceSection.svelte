@@ -15,7 +15,7 @@
 			subtitle: "dolor sit",
 			alt: "Lorem ipsum placeholder graphic",
 			visual:
-				"radial-gradient(circle at 50% 28%, rgba(241,236,223,0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad)",
+				"radial-gradient(circle at 50% 28%, rgba(210,173,99,0.24), transparent 30%), linear-gradient(145deg, #2f4738, #556f59 52%, #b5ad94)",
 			style: "--x: 4%; --y: 3%; --r: -7deg; --z: 2;",
 			marker: "Award"
 		},
@@ -24,7 +24,7 @@
 			subtitle: "consectetur",
 			alt: "Dolor sit amet placeholder graphic",
 			visual:
-				"radial-gradient(circle at 72% 18%, rgba(241,236,223,0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a)",
+				"radial-gradient(circle at 72% 18%, rgba(216,211,194,0.56), transparent 28%), linear-gradient(135deg, #b5ad94, #7f634a 48%, #2f4738)",
 			style: "--x: 43%; --y: 0%; --r: 5deg; --z: 3;",
 			marker: "Salon"
 		},
@@ -33,7 +33,7 @@
 			subtitle: "adipiscing elit",
 			alt: "Consectetur placeholder graphic",
 			visual:
-				"radial-gradient(circle at 24% 22%, rgba(241,236,223,0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f)",
+				"radial-gradient(circle at 24% 22%, rgba(216,211,194,0.58), transparent 26%), linear-gradient(145deg, #46382e, #7f634a 45%, #556f59)",
 			style: "--x: 13%; --y: 39%; --r: 4deg; --z: 4;",
 			marker: "Space"
 		},
@@ -42,7 +42,7 @@
 			subtitle: "lorem ipsum",
 			alt: "Adipiscing elit placeholder graphic",
 			visual:
-				"radial-gradient(circle at 76% 24%, rgba(235,229,214,0.74), transparent 30%), linear-gradient(135deg, #43533a, #c8c5ad 48%, #5a4237)",
+				"radial-gradient(circle at 76% 24%, rgba(210,173,99,0.2), transparent 30%), linear-gradient(135deg, #2f4738, #b5ad94 48%, #46382e)",
 			style: "--x: 55%; --y: 44%; --r: -4deg; --z: 5;",
 			marker: "Detail"
 		}
@@ -70,7 +70,7 @@
 <svelte:window onkeydown={handlePolaroidKeydown} />
 
 <section class="relative overflow-hidden bg-cream py-16 md:py-24">
-	<div class="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(111,127,95,0.18),transparent_42%)]"></div>
+	<div class="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)]"></div>
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
 			<div class="polaroid-pile" aria-label="Salon award and new salon space placeholders">
@@ -180,15 +180,15 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(125deg, rgba(241, 236, 223, 0.42), transparent 36%);
+		background: linear-gradient(125deg, rgba(216, 211, 194, 0.38), transparent 36%);
 	}
 
 	.placeholder-photo-grid {
 		position: absolute;
 		inset: 0;
 		background-image:
-			linear-gradient(rgba(241, 236, 223, 0.18) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(241, 236, 223, 0.18) 1px, transparent 1px);
+			linear-gradient(rgba(216, 211, 194, 0.16) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(216, 211, 194, 0.16) 1px, transparent 1px);
 		background-size: 2.1rem 2.1rem;
 		mix-blend-mode: soft-light;
 		opacity: 0.7;
@@ -197,7 +197,7 @@
 	.placeholder-photo-label {
 		position: relative;
 		z-index: 1;
-		border: 1px solid rgba(241, 236, 223, 0.46);
+		border: 1px solid rgba(216, 211, 194, 0.46);
 		background: rgba(37, 41, 31, 0.24);
 		padding: 0.45rem 0.9rem;
 		font-size: 0.72rem;
@@ -217,9 +217,9 @@
 		width: 5.25rem;
 		translate: -50% 0;
 		rotate: -2deg;
-		border: 1px solid rgba(216, 195, 170, 0.62);
-		background: rgba(251, 248, 243, 0.68);
-		box-shadow: 0 0.45rem 1rem rgba(111, 78, 69, 0.08);
+		border: 1px solid rgba(170, 180, 157, 0.78);
+		background: rgba(216, 211, 194, 0.74);
+		box-shadow: 0 0.45rem 1rem rgba(70, 56, 46, 0.08);
 		backdrop-filter: blur(4px);
 	}
 

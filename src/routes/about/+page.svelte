@@ -14,7 +14,7 @@
 			marker: "Lorem",
 			alt: "Placeholder portrait for Jacky",
 			visual:
-				"radial-gradient(circle at 24% 22%, rgba(241, 236, 223, 0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f)"
+				"radial-gradient(circle at 24% 22%, rgba(216, 211, 194, 0.58), transparent 26%), linear-gradient(145deg, #46382e, #7f634a 45%, #556f59)"
 		},
 		salon: {
 			title: "Dolor sit amet",
@@ -22,7 +22,7 @@
 			marker: "Ipsum",
 			alt: "Placeholder for the Halo Hair Studio salon space",
 			visual:
-				"radial-gradient(circle at 72% 18%, rgba(241, 236, 223, 0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a)"
+				"radial-gradient(circle at 72% 18%, rgba(216, 211, 194, 0.56), transparent 28%), linear-gradient(135deg, #b5ad94, #7f634a 48%, #2f4738)"
 		},
 		experience: {
 			title: "Consectetur",
@@ -30,7 +30,7 @@
 			marker: "Amet",
 			alt: "Placeholder for Jacky's hair experience",
 			visual:
-				"radial-gradient(circle at 50% 28%, rgba(241, 236, 223, 0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad)"
+				"radial-gradient(circle at 50% 28%, rgba(210, 173, 99, 0.24), transparent 30%), linear-gradient(145deg, #2f4738, #556f59 52%, #b5ad94)"
 		}
 	};
 
@@ -232,8 +232,8 @@
 		width: 5.75rem;
 		translate: -50% 0;
 		rotate: -2deg;
-		border: 1px solid rgba(198, 197, 177, 0.72);
-		background: rgba(241, 236, 223, 0.72);
+		border: 1px solid rgba(170, 180, 157, 0.78);
+		background: rgba(216, 211, 194, 0.74);
 		box-shadow: 0 0.45rem 1rem rgba(90, 66, 55, 0.08);
 		backdrop-filter: blur(4px);
 	}
@@ -249,15 +249,15 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(125deg, rgba(241, 236, 223, 0.42), transparent 36%);
+		background: linear-gradient(125deg, rgba(216, 211, 194, 0.38), transparent 36%);
 	}
 
 	.about-placeholder-grid {
 		position: absolute;
 		inset: 0;
 		background-image:
-			linear-gradient(rgba(241, 236, 223, 0.18) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(241, 236, 223, 0.18) 1px, transparent 1px);
+			linear-gradient(rgba(216, 211, 194, 0.16) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(216, 211, 194, 0.16) 1px, transparent 1px);
 		background-size: 2.1rem 2.1rem;
 		mix-blend-mode: soft-light;
 		opacity: 0.7;
@@ -266,7 +266,7 @@
 	.about-placeholder-label {
 		position: relative;
 		z-index: 1;
-		border: 1px solid rgba(241, 236, 223, 0.46);
+		border: 1px solid rgba(216, 211, 194, 0.46);
 		background: rgba(37, 41, 31, 0.24);
 		padding: 0.45rem 0.9rem;
 		font-size: 0.72rem;

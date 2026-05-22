@@ -9,7 +9,7 @@ export const services: Service[] = [
 		image: "/images/placeholders/colouring.jpg",
 		imageAlt: "Placeholder for rich hair colour service",
 		visual:
-			"radial-gradient(circle at 24% 22%, rgba(241,236,223,0.66), transparent 26%), linear-gradient(145deg, #5a4237, #9f7258 45%, #6f7f5f)"
+			"radial-gradient(circle at 24% 22%, rgba(216,211,194,0.58), transparent 26%), linear-gradient(145deg, #46382e, #7f634a 45%, #556f59)"
 	},
 	{
 		title: "Grey Transformations",
@@ -19,7 +19,7 @@ export const services: Service[] = [
 		image: "/images/placeholders/grey-transformations.jpg",
 		imageAlt: "Placeholder for grey transformation salon result",
 		visual:
-			"radial-gradient(circle at 50% 28%, rgba(241,236,223,0.82), transparent 30%), linear-gradient(145deg, #43533a, #6f7f5f 52%, #c8c5ad)"
+			"radial-gradient(circle at 50% 28%, rgba(210,173,99,0.24), transparent 30%), linear-gradient(145deg, #2f4738, #556f59 52%, #b5ad94)"
 	},
 	{
 		title: "Keratin Smoothing Treatment",
@@ -29,6 +29,6 @@ export const services: Service[] = [
 		image: "/images/placeholders/keratin-smoothing-treatment.jpg",
 		imageAlt: "Placeholder for keratin smoothing treatment result",
 		visual:
-			"radial-gradient(circle at 72% 18%, rgba(241,236,223,0.72), transparent 28%), linear-gradient(135deg, #c8c5ad, #9f7258 48%, #43533a)"
+			"radial-gradient(circle at 72% 18%, rgba(216,211,194,0.56), transparent 28%), linear-gradient(135deg, #b5ad94, #7f634a 48%, #2f4738)"
 	}
 ];

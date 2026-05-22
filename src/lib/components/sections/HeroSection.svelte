@@ -9,7 +9,7 @@
 </script>
 
 <section class="relative isolate overflow-hidden bg-background">
-	<div class="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_18%_18%,rgba(185,130,99,0.18),transparent_30%),radial-gradient(circle_at_82%_16%,rgba(138,154,123,0.2),transparent_34%),linear-gradient(180deg,rgba(251,248,243,0.82),rgba(247,241,234,0))]"></div>
+	<div class="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_18%_18%,rgba(47,71,56,0.28),transparent_32%),radial-gradient(circle_at_78%_12%,rgba(210,173,99,0.18),transparent_30%),linear-gradient(180deg,rgba(216,211,194,0.72),rgba(203,211,192,0))]"></div>
 	<div class="mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 md:py-28 lg:px-8">
 		<h1 class="font-display text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
 			Halo Hair Studio

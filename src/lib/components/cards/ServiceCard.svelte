@@ -62,7 +62,7 @@
 
 <style>
 	:global(.service-card) {
-		filter: drop-shadow(0 1.2rem 1.8rem rgba(111, 78, 69, 0.1));
+		filter: drop-shadow(0 1.2rem 1.8rem rgba(70, 56, 46, 0.12));
 	}
 
 	.polaroid-card {
@@ -78,7 +78,7 @@
 		inset: 0;
 		z-index: -1;
 		background:
-			linear-gradient(110deg, rgba(241, 236, 223, 0.45), transparent 36%),
+			linear-gradient(110deg, rgba(216, 211, 194, 0.42), transparent 36%),
 			linear-gradient(var(--salon-surface), var(--salon-cream));
 	}
 
@@ -88,9 +88,9 @@
 		z-index: 5;
 		height: 1.6rem;
 		width: 5.75rem;
-		border: 1px solid rgba(198, 197, 177, 0.72);
-		background: rgba(241, 236, 223, 0.72);
-		box-shadow: 0 0.45rem 1rem rgba(90, 66, 55, 0.08);
+		border: 1px solid rgba(170, 180, 157, 0.78);
+		background: rgba(216, 211, 194, 0.74);
+		box-shadow: 0 0.45rem 1rem rgba(70, 56, 46, 0.08);
 		backdrop-filter: blur(4px);
 	}
 
@@ -104,15 +104,15 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(125deg, rgba(241, 236, 223, 0.42), transparent 36%);
+		background: linear-gradient(125deg, rgba(216, 211, 194, 0.38), transparent 36%);
 	}
 
 	.polaroid-photo-grid {
 		position: absolute;
 		inset: 0;
 		background-image:
-			linear-gradient(rgba(241, 236, 223, 0.18) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(241, 236, 223, 0.18) 1px, transparent 1px);
+			linear-gradient(rgba(216, 211, 194, 0.16) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(216, 211, 194, 0.16) 1px, transparent 1px);
 		background-size: 2.1rem 2.1rem;
 		mix-blend-mode: soft-light;
 		opacity: 0.7;
@@ -121,7 +121,7 @@
 	.polaroid-photo-label {
 		position: relative;
 		z-index: 1;
-		border: 1px solid rgba(241, 236, 223, 0.46);
+		border: 1px solid rgba(216, 211, 194, 0.46);
 		background: rgba(37, 41, 31, 0.24);
 		padding: 0.45rem 0.9rem;
 		font-size: 0.72rem;
