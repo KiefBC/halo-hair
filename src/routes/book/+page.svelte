@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Book Your Appointment | Halo Hair Studio</title>
+	<title>Book Appointment | Halo Hair Studio</title>
 	<meta name="description" content="Book your Halo Hair Studio appointment through Vagaro or start with a consultation." />
 </svelte:head>
 
@@ -13,7 +13,7 @@
 	<div class="mx-auto max-w-5xl">
 		<div class="mb-10 max-w-3xl">
 			<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Booking</p>
-			<h1 class="mt-3 font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Book your appointment</h1>
+			<h1 class="mt-3 font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Book Appointment</h1>
 			<p class="mt-5 text-lg leading-8 text-muted-foreground">
 				Choose your service through Vagaro. If you are unsure what to book, start with a consultation.
 			</p>

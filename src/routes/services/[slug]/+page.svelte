@@ -32,9 +32,11 @@
 				</div>
 			</div>
 
-			<div class="rounded-3xl border border-sand/70 bg-surface/70 p-6 shadow-xl shadow-rosewood/10 md:p-8">
+			<div class="service-detail-copy min-w-0 rounded-3xl border border-sand/70 bg-surface/70 p-6 shadow-xl shadow-rosewood/10 md:p-8">
 				<p class="text-xs font-semibold uppercase tracking-[0.28em] text-clay">Service Details</p>
-				<h1 class="mt-3 font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">{service.title}</h1>
+				<h1 class="service-detail-title mt-3 max-w-full whitespace-nowrap font-display font-semibold text-foreground">
+					{service.title}
+				</h1>
 				<p class="mt-5 text-lg leading-8 text-muted-foreground">{service.detail}</p>
 
 				<div class="mt-8 grid gap-4 sm:grid-cols-2">
@@ -86,6 +88,17 @@
 </section>
 
 <style>
+	.service-detail-copy {
+		container-type: inline-size;
+	}
+
+	.service-detail-title {
+		font-size: clamp(1.45rem, 5vw, 3.5rem);
+		font-size: clamp(1.45rem, 7.4cqw, 3.8rem);
+		line-height: 0.96;
+		letter-spacing: -0.045em;
+	}
+
 	.service-detail-polaroid {
 		position: relative;
 		rotate: -1.5deg;
@@ -132,16 +145,20 @@
 	}
 
 	.service-detail-photo-label {
+		display: inline-block;
 		position: relative;
 		z-index: 1;
-		max-width: 80%;
+		max-width: calc(100% - 2rem);
+		overflow: hidden;
 		border: 1px solid rgba(216, 211, 194, 0.46);
 		background: rgba(37, 41, 31, 0.24);
 		padding: 0.65rem 1rem;
 		text-align: center;
-		font-size: 0.78rem;
+		font-size: clamp(0.58rem, 1.8vw, 0.78rem);
 		font-weight: 700;
-		letter-spacing: 0.22em;
+		letter-spacing: 0.16em;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		text-transform: uppercase;
 		color: var(--salon-cream);
 		backdrop-filter: blur(6px);

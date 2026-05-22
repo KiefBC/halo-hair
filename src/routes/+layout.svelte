@@ -9,14 +9,28 @@
 
 	let { children } = $props();
 
+	function handleViewTransitionPromise(promise: Promise<unknown>) {
+		promise.catch(() => {
+			// View Transition promises reject when the browser aborts an in-flight route dissolve.
+		});
+	}
+
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
 
-		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
-				resolve(undefined);
-				await navigation.complete;
-			});
+		return new Promise<void>((resolve) => {
+			try {
+				const transition = document.startViewTransition(async () => {
+					resolve();
+					await navigation.complete;
+				});
+
+				handleViewTransitionPromise(transition.ready);
+				handleViewTransitionPromise(transition.finished);
+				handleViewTransitionPromise(transition.updateCallbackDone);
+			} catch {
+				resolve();
+			}
 		});
 	});
 </script>

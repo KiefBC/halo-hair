@@ -3,7 +3,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import salonUpdatesMarkdown from "$lib/content/salon-updates.md?raw";
 	import { markdownToHtml } from "$lib/content/markdown";
-	import { onMount } from "svelte";
+	import { onMount, tick } from "svelte";
 
 	const newSalonSpaceMarker = "## Lorem Ipsum Salon Space";
 	const [awardMarkdown, newSalonSpaceMarkdown = ""] = salonUpdatesMarkdown.split(newSalonSpaceMarker);
@@ -54,6 +54,7 @@
 	const carouselRestartDelay = 1800;
 
 	let activePolaroid = $state<SalonPolaroid | null>(null);
+	let isMounted = $state(false);
 	let carouselElement = $state<HTMLDivElement | null>(null);
 	let isCarouselDragging = $state(false);
 	let autoAdvanceTimer: ReturnType<typeof setTimeout> | undefined;
@@ -196,7 +197,8 @@
 	}
 
 	onMount(() => {
-		startAutoAdvance();
+		isMounted = true;
+		tick().then(() => startAutoAdvance());
 
 		return clearAutoAdvance;
 	});
@@ -208,40 +210,42 @@
 	<div class="absolute inset-y-0 left-0 hidden w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)] md:block"></div>
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-			<div
-				bind:this={carouselElement}
-				class:cursor-grabbing={isCarouselDragging}
-				class="salon-polaroid-carousel -mx-4 grid auto-cols-[78vw] grid-flow-col gap-5 overflow-x-auto scroll-px-4 snap-x snap-mandatory px-4 pb-7 pt-4 sm:-mx-6 sm:auto-cols-[20rem] sm:scroll-px-6 sm:px-6 md:hidden"
-				role="region"
-				aria-label="Salon award and new salon space carousel"
-				onscroll={handleCarouselScroll}
-				onpointerdown={handleCarouselPointerDown}
-				onpointermove={handleCarouselPointerMove}
-				onpointerup={handleCarouselPointerEnd}
-				onpointercancel={handleCarouselPointerEnd}
-				onpointerleave={handleCarouselPointerEnd}
-			>
-				{#each salonPolaroids as polaroid}
-					<div class="salon-polaroid-slide snap-start">
-						<button
-							type="button"
-							aria-label={`Enlarge ${polaroid.alt}`}
-							onclick={(event) => handlePolaroidClick(event, polaroid)}
-							class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-							style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
-						>
-							<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
-								<div class="placeholder-photo-grid" aria-hidden="true"></div>
-								<span class="placeholder-photo-label">{polaroid.marker}</span>
-							</div>
-							<div class="pt-4 text-center">
-								<p class="font-display text-2xl font-semibold leading-none text-rosewood">{polaroid.title}</p>
-								<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">{polaroid.subtitle}</p>
-							</div>
-						</button>
-					</div>
-				{/each}
-			</div>
+			{#if isMounted}
+				<div
+					bind:this={carouselElement}
+					class:cursor-grabbing={isCarouselDragging}
+					class="salon-polaroid-carousel -mx-4 grid auto-cols-[78vw] grid-flow-col gap-5 overflow-x-auto scroll-px-4 snap-x snap-mandatory px-4 pb-7 pt-4 sm:-mx-6 sm:auto-cols-[20rem] sm:scroll-px-6 sm:px-6 md:hidden"
+					role="region"
+					aria-label="Salon award and new salon space carousel"
+					onscroll={handleCarouselScroll}
+					onpointerdown={handleCarouselPointerDown}
+					onpointermove={handleCarouselPointerMove}
+					onpointerup={handleCarouselPointerEnd}
+					onpointercancel={handleCarouselPointerEnd}
+					onpointerleave={handleCarouselPointerEnd}
+				>
+					{#each salonPolaroids as polaroid}
+						<div class="salon-polaroid-slide snap-start">
+							<button
+								type="button"
+								aria-label={`Enlarge ${polaroid.alt}`}
+								onclick={(event) => handlePolaroidClick(event, polaroid)}
+								class="salon-polaroid cursor-zoom-in border-0 bg-white p-3 pb-5 text-left shadow-xl shadow-rosewood/15 outline-none transition duration-300 hover:shadow-2xl hover:shadow-rosewood/25 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+								style={`${polaroid.style} --placeholder-visual: ${polaroid.visual};`}
+							>
+								<div class="placeholder-photo relative overflow-hidden bg-cream" role="img" aria-label={polaroid.alt}>
+									<div class="placeholder-photo-grid" aria-hidden="true"></div>
+									<span class="placeholder-photo-label">{polaroid.marker}</span>
+								</div>
+								<div class="pt-4 text-center">
+									<p class="font-display text-2xl font-semibold leading-none text-rosewood">{polaroid.title}</p>
+									<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">{polaroid.subtitle}</p>
+								</div>
+							</button>
+						</div>
+					{/each}
+				</div>
+			{/if}
 
 			<div class="polaroid-pile hidden md:block" aria-label="Salon award and new salon space placeholders">
 				{#each salonPolaroids as polaroid}
