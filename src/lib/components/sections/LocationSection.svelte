@@ -11,12 +11,12 @@
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
 			<div>
-				<h2 class="font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">Get in Touch</h2>
+				<h2 class="text-center font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">Get in Touch</h2>
 
-				<div class="mt-8 rounded-3xl border border-sand/70 bg-background p-6">
+				<div class="mt-8 rounded-3xl border border-sand/70 bg-background p-6 text-center">
 					<p class="text-sm font-semibold uppercase tracking-[0.22em] text-clay">Find the salon</p>
 					<p class="mt-2 font-display text-3xl font-semibold text-foreground">{salonLocation.address}</p>
-					<div class="mt-6 flex flex-col gap-3 sm:flex-row">
+					<div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
 						<Button href={salonLocation.directionsUrl} target="_blank" rel="noreferrer" class="rounded-full bg-moss text-cream hover:bg-rosewood">
 							<MapPinnedIcon class="size-4" aria-hidden="true" />
 							Get directions
