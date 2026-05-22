@@ -70,7 +70,7 @@
 
 <svelte:window onkeydown={handlePolaroidKeydown} />
 
-<section class="relative overflow-hidden bg-cream py-16 md:py-24">
+<section class="relative overflow-hidden bg-cream py-14 md:py-20">
 	<div class="absolute inset-y-0 left-0 hidden w-1/2 bg-[radial-gradient(circle_at_0%_35%,rgba(47,71,56,0.22),transparent_42%)] md:block"></div>
 	<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
@@ -130,7 +130,7 @@
 			</div>
 		</div>
 
-		<div class="mt-20 rounded-3xl border border-sand/70 bg-background p-6 md:p-8 lg:mt-24">
+		<div class="mt-14 rounded-3xl border border-sand/70 bg-background p-6 md:p-8 lg:mt-16">
 			<div class="salon-updates new-salon-space-copy text-muted-foreground">
 				{@html newSalonSpaceHtml}
 			</div>
@@ -181,7 +181,7 @@
 <style>
 	.polaroid-pile {
 		position: relative;
-		min-height: 34rem;
+		min-height: 30.5rem;
 	}
 
 	.salon-polaroid {
@@ -189,7 +189,7 @@
 		left: var(--x);
 		top: var(--y);
 		z-index: var(--z);
-		width: clamp(9.5rem, 38vw, 16.25rem);
+		width: clamp(9rem, 34vw, 14.75rem);
 		transform: rotate(var(--r));
 		transform-origin: center;
 	}
@@ -348,7 +348,7 @@
 	.salon-updates :global(h2) {
 		margin-top: 1.75rem;
 		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 5vw, 3.75rem);
+		font-size: clamp(2.25rem, 4vw, 3.25rem);
 		font-weight: 600;
 		line-height: 0.98;
 		color: var(--foreground);

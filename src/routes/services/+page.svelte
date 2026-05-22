@@ -22,9 +22,11 @@
 			</div>
 		</div>
 
-		<div class="mt-12 grid gap-6 md:grid-cols-3">
+		<div class="services-polaroid-carousel -mx-4 mt-10 grid auto-cols-[78vw] grid-flow-col gap-5 overflow-x-auto scroll-px-4 snap-x snap-mandatory px-4 pb-7 pt-4 sm:-mx-6 sm:auto-cols-[20rem] sm:scroll-px-6 sm:px-6 md:mx-0 md:mt-12 md:grid-flow-row md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-0" aria-label="Services carousel">
 			{#each services as service}
-				<ServiceCard {service} />
+				<div class="services-polaroid-slide snap-start">
+					<ServiceCard {service} />
+				</div>
 			{/each}
 		</div>
 

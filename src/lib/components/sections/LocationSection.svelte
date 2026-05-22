@@ -7,11 +7,11 @@
 	import { site } from "$lib/data/site";
 </script>
 
-<section id="contact" class="scroll-mt-24 bg-cream py-16 md:scroll-mt-28 md:py-24">
+<section id="contact" class="scroll-mt-24 bg-cream pb-14 pt-8 md:scroll-mt-28 md:pb-20 md:pt-10">
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
 			<div>
-				<h2 class="font-display text-5xl font-semibold leading-tight text-foreground md:text-6xl">Get in Touch</h2>
+				<h2 class="font-display text-4xl font-semibold leading-tight text-foreground md:text-5xl">Get in Touch</h2>
 
 				<div class="mt-8 rounded-3xl border border-sand/70 bg-background p-6">
 					<p class="text-sm font-semibold uppercase tracking-[0.22em] text-clay">Find the salon</p>

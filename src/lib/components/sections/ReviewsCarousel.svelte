@@ -12,7 +12,7 @@
 	const reviewsDescription = markdownSectionText(homeMarkdown, "Reviews");
 </script>
 
-<section class="overflow-hidden bg-background py-16 md:py-24">
+<section class="overflow-hidden bg-background py-14 md:py-20">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 			<SectionHeading align="left" eyebrow="Reviews" title="Kind words from clients" description={reviewsDescription} />
